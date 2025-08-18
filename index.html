@@ -5,11 +5,20 @@
   <title>Mascot Integration Catalog</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { margin-bottom: 10px; }
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 10px;
+    }
+    h1 { margin: 0; }
+    #logo {
+      height: 50px; /* adjust logo size */
+    }
     #searchBar {
       width: 100%;
       padding: 8px;
-      margin-bottom: 20px;
+      margin: 20px 0;
       font-size: 16px;
       border: 1px solid #ccc;
       border-radius: 5px;
@@ -29,7 +38,11 @@
   </style>
 </head>
 <body>
-  <h1>Mascot Integration Catalog</h1>
+  <header>
+    <h1>Mascot Integration Catalog</h1>
+    <img id="logo" src="images/mascot-logo.png" alt="Mascot Logo">
+  </header>
+
   <input type="text" id="searchBar" placeholder="Search categories or formats...">
   <div id="catalog"></div>
 
