@@ -1,96 +1,54 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-<meta charset="UTF-8">
-<title>Mascot Integration Catalog</title>
-<style>
-  body { font-family: sans-serif; padding: 2rem; background: #f9f9f9; color: #333; }
-  h1 { margin-bottom: 1rem; }
-  input, select { margin: 0.5rem 0; padding: 0.5rem; font-size: 1rem; }
-  .doc { margin-bottom: 0.5rem; padding: 0.5rem; background: #fff; border-radius: 8px; box-shadow: 0 1px 3px rgba(0,0,0,0.1); }
-  .status { font-size: 0.85em; color: #666; margin-left: 0.5rem; }
-</style>
+  <meta charset="UTF-8">
+  <title>Mascot Integration Catalog</title>
+  <style>
+    body { font-family: Arial, sans-serif; margin: 20px; }
+    h1 { margin-bottom: 20px; }
+    details { margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; padding: 8px; background: #f9f9f9; }
+    summary { font-size: 18px; font-weight: bold; cursor: pointer; }
+    .format { margin-left: 20px; margin-top: 5px; }
+    a { text-decoration: none; color: #0066cc; }
+    a:hover { text-decoration: underline; }
+    .notes { font-style: italic; color: #555; margin-left: 5px; }
+  </style>
 </head>
 <body>
+  <h1>Mascot Integration Catalog</h1>
+  <div id="catalog"></div>
 
-<h1>Mascot Integration Catalog</h1>
+  <script>
+    async function loadCatalog() {
+      const response = await fetch("catalog.json");
+      const data = await response.json();
 
-<input id="search" placeholder="Search by category or format...">
-<select id="categoryFilter">
-  <option value="">All Categories</option>
-</select>
+      const container = document.getElementById("catalog");
 
-<div id="docs"></div>
+      data.categories.forEach(category => {
+        const details = document.createElement("details");
+        const summary = document.createElement("summary");
+        summary.textContent = category.name;
+        details.appendChild(summary);
 
-<script>
-  async function loadCatalog() {
-    const res = await fetch('catalog.json');
-    const catalog = await res.json();
-    return catalog.categories.flatMap(cat =>
-      cat.formats.map(fmt => ({
-        category: cat.name,
-        name: fmt.name,
-        docUrl: fmt.docUrl,
-        status: fmt.status || ''
-      }))
-    );
-  }
+        category.formats.forEach(f => {
+          const formatEl = document.createElement("div");
+          formatEl.className = "format";
 
-  function renderCategoryOptions(docs) {
-    const categories = [...new Set(docs.map(d => d.category))];
-    const select = document.getElementById('categoryFilter');
-    categories.forEach(cat => {
-      const option = document.createElement('option');
-      option.value = cat;
-      option.textContent = cat;
-      select.appendChild(option);
-    });
-  }
+          let html = `<strong>${f.name}</strong> - <a href="${f.docUrl}" target="_blank">${f.docUrl}</a>`;
+          if (f.notes) {
+            html += ` <span class="notes">(${f.notes})</span>`;
+          }
 
-  function renderDocs(docs, filters = {}) {
-    const { search = '', category = ''} = filters;
-    const container = document.getElementById('docs');
-    container.innerHTML = '';
+          formatEl.innerHTML = html;
+          details.appendChild(formatEl);
+        });
 
-    const filtered = docs.filter(d =>
-      (!search || d.category.toLowerCase().includes(search) || d.name.toLowerCase().includes(search)) &&
-      (!category || d.category === category)
-    );
-
-    if (!filtered.length) {
-      container.textContent = 'No documents found.';
-      return;
-    }
-
-    filtered.forEach(d => {
-      const div = document.createElement('div');
-      div.className = 'doc';
-      div.innerHTML = `<a href="${d.docUrl}" target="_blank">${d.category} → ${d.name}</a>;
-      container.appendChild(div);
-    });
-  }
-
-  (async () => {
-    const docs = await loadCatalog();
-    renderCategoryOptions(docs);
-
-    const searchInput = document.getElementById('search');
-    const categorySelect = document.getElementById('categoryFilter');
-
-    function update() {
-      renderDocs(docs, {
-        search: searchInput.value.toLowerCase(),
-        category: categorySelect.value
+        container.appendChild(details);
       });
     }
 
-    searchInput.addEventListener('input', update);
-    categorySelect.addEventListener('change', update);
-
-    update();
-  })();
-</script>
-
+    loadCatalog();
+  </script>
 </body>
 </html>
-
