@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Integration Catalog</title>
+  <style>
+    body { font-family: sans-serif; padding: 2rem; }
+    input { margin-bottom: 1rem; padding: 0.5rem; width: 300px; }
+    .doc { margin-bottom: 0.5rem; }
+    .status { font-size: 0.9em; color: gray; }
+  </style>
+</head>
+<body>
+  <h1>Integration Catalog</h1>
+  <input id="search" placeholder="Search by category or format...">
+
+  <div id="docs"></div>
+
+  <script>
+    async function loadCatalog() {
+      const res = await fetch('catalog.json');
+      const catalog = await res.json();
+      return catalog.categories.flatMap(cat =>
+        cat.formats.map(fmt => ({
+          category: cat.name,
+          name: fmt.name,
+          docUrl: fmt.docUrl,
+          status: fmt.status || ''
+        }))
+      );
+    }
+
+    function renderDocs(docs, filter = '') {
+      const container = document.getElementById('docs');
+      container.innerHTML = '';
+      const filtered = docs.filter(d => 
+        d.category.toLowerCase().includes(filter) || 
+        d.name.toLowerCase().includes(filter)
+      );
+      filtered.forEach(d => {
+        const div = document.createElement('div');
+        div.className = 'doc';
+        div.innerHTML = `<a href="${d.docUrl}" target="_blank">${d.category} → ${d.name}</a> <span class="status">(${d.status})</span>`;
+        container.appendChild(div);
+      });
+    }
+
+    (async () => {
+      const docs = await loadCatalog();
+      const searchInput = document.getElementById('search');
+      renderDocs(docs);
+
+      searchInput.addEventListener('input', () => {
+        const query = searchInput.value.toLowerCase();
+        renderDocs(docs, query);
+      });
+    })();
+  </script>
+</body>
+</html>
