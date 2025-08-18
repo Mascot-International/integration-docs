@@ -1,64 +1,64 @@
 {
   "categories": [
-  {
-        "name": "API",
-        "formats": [
-          { "name": "Orders", "docUrl": "https://developer.shopify.com/api", "status": "planned" }
-        ]
-      },
-      {
-        "name": "EDIFACT",
-        "formats": [
-          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
-          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-      },
-      {
-        "name": "XML",
-        "formats": [
-          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
-          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-      },
-      {
-        "name": "OIOUBL",
-        "formats": [
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-              },
-      {
-        "name": "Xrechnung",
-        "formats": [
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-              },
-      {
-        "name": "ZUGFeRD",
-        "formats": [
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-              },
-      {
-        "name": "TBD",
-        "formats": [
-          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
-          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-              },
-      {
-        "name": "TDB",
-        "formats": [
-          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
-          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
-        ]
-      }
-    ]
-  }
+    {
+      "name": "API",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://developer.shopify.com/api", "status": "planned" }
+      ]
+    },
+    {
+      "name": "EDIFACT",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" },
+        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "XML",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" },
+        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "OIOUBL",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "Xrechnung",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "ZUGFeRD",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "TBD",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" },
+        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    },
+    {
+      "name": "TDB",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" },
+        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+      ]
+    }
+  ]
+}
