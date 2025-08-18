@@ -1,19 +1,38 @@
 {
   "categories": [
-    {
-      "name": "Orders",
-      "formats": [
-        { "name": "API", "docUrl": "docs/Orders/Orders_API_Guide.pdf", "status": "planned" },
-        { "name": "XML", "docUrl": "docs/Orders/Orders_XML_Spec.pdf", "status": "stable" },
-        { "name": "EDIFACT", "docUrl": "docs/Orders/Orders_EDIFACT_Guide.pdf", "status": "stable" }
-      ]
-    },
-    {
-      "name": "Invoice",
-      "formats": [
-        { "name": "XML", "docUrl": "docs/Invoice/Invoice_XML_Spec.pdf", "status": "beta" },
-        { "name": "XRechnung", "docUrl": "docs/Invoice/Invoice_XRechnung_Guide.pdf", "status": "stable" }
-      ]
-    }
-  ]
-}
+  {
+        "name": "Orders",
+        "formats": [
+          { "name": "API", "docUrl": "https://developer.shopify.com/api", "status": "planned" },
+          { "name": "XML", "docUrl": "https://www.oasis-open.org/standards#xml", "status": "stable" },
+          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "OpenTrans", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+      },
+      {
+        "name": "Order Response",
+        "formats": [
+          { "name": "XML", "docUrl": "https://www.w3.org/XML/", "status": "beta" },
+          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "OpenTrans", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+      },
+      {
+        "name": "Invoice",
+        "formats": [
+          { "name": "XML", "docUrl": "https://www.oasis-open.org/standards#xml", "status": "beta" },
+          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "OIOUBL", "docUrl": "https://digst.dk/it-loesninger/oioubl/", "status": "stable" },
+          { "name": "ZUGFeRD", "docUrl": "https://www.ferd-net.de/standards/zugferd/", "status": "stable" },
+          { "name": "XRechnung", "docUrl": "https://xeinkauf.de/xrechnung/", "status": "stable" }
+        ]
+      },
+      {
+        "name": "Dispatch Advice",
+        "formats": [
+          { "name": "XML", "docUrl": "https://www.oasis-open.org/committees/ubl/", "status": "beta" },
+          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" }
+        ]
+      }
+    ]
+  }
