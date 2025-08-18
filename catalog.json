@@ -1,37 +1,63 @@
 {
   "categories": [
   {
-        "name": "Orders",
+        "name": "API",
         "formats": [
-          { "name": "API", "docUrl": "https://developer.shopify.com/api", "status": "planned" },
-          { "name": "XML", "docUrl": "https://www.oasis-open.org/standards#xml", "status": "stable" },
-          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "OpenTrans", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Orders", "docUrl": "https://developer.shopify.com/api", "status": "planned" }
         ]
       },
       {
-        "name": "Order Response",
+        "name": "EDIFACT",
         "formats": [
-          { "name": "XML", "docUrl": "https://www.w3.org/XML/", "status": "beta" },
-          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "OpenTrans", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
         ]
       },
       {
-        "name": "Invoice",
+        "name": "XML",
         "formats": [
-          { "name": "XML", "docUrl": "https://www.oasis-open.org/standards#xml", "status": "beta" },
-          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
-          { "name": "OIOUBL", "docUrl": "https://digst.dk/it-loesninger/oioubl/", "status": "stable" },
-          { "name": "ZUGFeRD", "docUrl": "https://www.ferd-net.de/standards/zugferd/", "status": "stable" },
-          { "name": "XRechnung", "docUrl": "https://xeinkauf.de/xrechnung/", "status": "stable" }
+          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
         ]
       },
       {
-        "name": "Dispatch Advice",
+        "name": "OIOUBL",
         "formats": [
-          { "name": "XML", "docUrl": "https://www.oasis-open.org/committees/ubl/", "status": "beta" },
-          { "name": "EDIFACT", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" }
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+              },
+      {
+        "name": "Xrechnung",
+        "formats": [
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+              },
+      {
+        "name": "ZUGFeRD",
+        "formats": [
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+              },
+      {
+        "name": "TBD",
+        "formats": [
+          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+        ]
+              },
+      {
+        "name": "TDB",
+        "formats": [
+          { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "status": "stable" },
+          { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact", "status": "stable" },
+          { "name": "Invoice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
+          { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/", "status": "stable" }
         ]
       }
     ]
