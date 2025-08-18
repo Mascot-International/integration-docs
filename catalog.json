@@ -3,7 +3,7 @@
     {
       "name": "API",
       "formats": [
-        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "notes": "JSON format on GitHub" }
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "notes": "JSON format on GitHub"}
       ]
     },
     {
@@ -18,7 +18,7 @@
     {
       "name": "XML",
       "formats": [
-        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "notes": "Includes XSD + 4 example files" },
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "notes": "Includes PDF Specification, XSD and 4 example files" },
         { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact" },
         { "name": "Invoice", "docUrl": "https://www.opentrans.org/" },
         { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/" }
@@ -27,19 +27,19 @@
     {
       "name": "OIOUBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" }
+        { "name": "Invoice", "docUrl": "https://docs.oasis-open.org/ubl/os-UBL-2.1/xml/UBL-Invoice-2.1-Example.xml", "notes": "Version 2.02"}
       ]
     },
     {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" }
+        { "name": "Invoice", "docUrl": "https://en.e-rechnung-bund.de/e-invoicing-faq/xrechnung/" }
       ]
     },
     {
       "name": "ZUGFeRD",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" }
+        { "name": "Invoice", "docUrl": "https://www.ferd-net.de/en/standards/zugferd/factur-x" }
       ]
     },
     {
