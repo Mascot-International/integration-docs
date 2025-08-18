@@ -5,8 +5,22 @@
   <title>Mascot Integration Catalog</title>
   <style>
     body { font-family: Arial, sans-serif; margin: 20px; }
-    h1 { margin-bottom: 20px; }
-    details { margin-bottom: 15px; border: 1px solid #ddd; border-radius: 5px; padding: 8px; background: #f9f9f9; }
+    h1 { margin-bottom: 10px; }
+    #searchBar {
+      width: 100%;
+      padding: 8px;
+      margin-bottom: 20px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 5px;
+    }
+    details { 
+      margin-bottom: 15px; 
+      border: 1px solid #ddd; 
+      border-radius: 5px; 
+      padding: 8px; 
+      background: #f9f9f9; 
+    }
     summary { font-size: 18px; font-weight: bold; cursor: pointer; }
     .format { margin-left: 20px; margin-top: 5px; }
     a { text-decoration: none; color: #0066cc; }
@@ -16,16 +30,23 @@
 </head>
 <body>
   <h1>Mascot Integration Catalog</h1>
+  <input type="text" id="searchBar" placeholder="Search categories or formats...">
   <div id="catalog"></div>
 
   <script>
+    let catalogData = [];
+
     async function loadCatalog() {
       const response = await fetch("catalog.json");
-      const data = await response.json();
+      catalogData = await response.json();
+      renderCatalog(catalogData.categories);
+    }
 
+    function renderCatalog(categories) {
       const container = document.getElementById("catalog");
+      container.innerHTML = "";
 
-      data.categories.forEach(category => {
+      categories.forEach(category => {
         const details = document.createElement("details");
         const summary = document.createElement("summary");
         summary.textContent = category.name;
@@ -47,6 +68,20 @@
         container.appendChild(details);
       });
     }
+
+    document.getElementById("searchBar").addEventListener("input", function() {
+      const query = this.value.toLowerCase();
+      const filtered = catalogData.categories.map(cat => {
+        const matchedFormats = cat.formats.filter(f =>
+          f.name.toLowerCase().includes(query) ||
+          (f.notes && f.notes.toLowerCase().includes(query)) ||
+          cat.name.toLowerCase().includes(query)
+        );
+        return matchedFormats.length > 0 ? { ...cat, formats: matchedFormats } : null;
+      }).filter(Boolean);
+
+      renderCatalog(filtered);
+    });
 
     loadCatalog();
   </script>
