@@ -1,0 +1,19 @@
+{
+  "categories": [
+    {
+      "name": "Orders",
+      "formats": [
+        { "name": "API", "docUrl": "docs/Orders/Orders_API_Guide.pdf", "status": "planned" },
+        { "name": "XML", "docUrl": "docs/Orders/Orders_XML_Spec.pdf", "status": "stable" },
+        { "name": "EDIFACT", "docUrl": "docs/Orders/Orders_EDIFACT_Guide.pdf", "status": "stable" }
+      ]
+    },
+    {
+      "name": "Invoice",
+      "formats": [
+        { "name": "XML", "docUrl": "docs/Invoice/Invoice_XML_Spec.pdf", "status": "beta" },
+        { "name": "XRechnung", "docUrl": "docs/Invoice/Invoice_XRechnung_Guide.pdf", "status": "stable" }
+      ]
+    }
+  ]
+}
