@@ -19,12 +19,6 @@
 <select id="categoryFilter">
   <option value="">All Categories</option>
 </select>
-<select id="statusFilter">
-  <option value="">All Statuses</option>
-  <option value="planned">Planned</option>
-  <option value="beta">Beta</option>
-  <option value="stable">Stable</option>
-</select>
 
 <div id="docs"></div>
 
@@ -54,14 +48,13 @@
   }
 
   function renderDocs(docs, filters = {}) {
-    const { search = '', category = '', status = '' } = filters;
+    const { search = '', category = ''} = filters;
     const container = document.getElementById('docs');
     container.innerHTML = '';
 
     const filtered = docs.filter(d =>
       (!search || d.category.toLowerCase().includes(search) || d.name.toLowerCase().includes(search)) &&
-      (!category || d.category === category) &&
-      (!status || d.status.toLowerCase() === status)
+      (!category || d.category === category)
     );
 
     if (!filtered.length) {
@@ -72,7 +65,7 @@
     filtered.forEach(d => {
       const div = document.createElement('div');
       div.className = 'doc';
-      div.innerHTML = `<a href="${d.docUrl}" target="_blank">${d.category} → ${d.name}</a><span class="status">(${d.status})</span>`;
+      div.innerHTML = `<a href="${d.docUrl}" target="_blank">${d.category} → ${d.name}</a>;
       container.appendChild(div);
     });
   }
@@ -83,19 +76,16 @@
 
     const searchInput = document.getElementById('search');
     const categorySelect = document.getElementById('categoryFilter');
-    const statusSelect = document.getElementById('statusFilter');
 
     function update() {
       renderDocs(docs, {
         search: searchInput.value.toLowerCase(),
-        category: categorySelect.value,
-        status: statusSelect.value
+        category: categorySelect.value
       });
     }
 
     searchInput.addEventListener('input', update);
     categorySelect.addEventListener('change', update);
-    statusSelect.addEventListener('change', update);
 
     update();
   })();
