@@ -1,0 +1,49 @@
+{
+"Header": {
+"Ordertype": "ZI",
+"BuyerID": "1234567890123",
+"PreferredDeliveryDate": "2025-08-20",
+"OrderReference": "ORD1234567890",
+"IssueEmail": "customer@example.com",
+"NonStandardDelivery": {
+"DeliveryByNumber": "9876543210123",
+"DeliveryByAddress": {
+"Name": "John Doe",
+"Address": "123 Example St",
+"CountryCode": "DK",
+"PostCode": "1000",
+"City": "Copenhagen"
+}
+}
+},
+"OrderLine": [
+{
+"BuyersLineReference": "LINE001",
+"SuppliersEANCode": "1234567890123",
+"SuppliersMaterialNumber": "MAT12345",
+"ProductDescription": "Example Product 1",
+"Quantity": 10
+},
+{
+"BuyersLineReference": "LINE002",
+"SuppliersEANCode": "1234567890124",
+"SuppliersMaterialNumber": "MAT12346",
+"ProductDescription": "Example Product 2",
+"Quantity": 5
+}
+],
+"Dropshipment": {
+"DeliveryType": "Z00",
+"DepositLocation": "Warehouse 1",
+"Name": "Jane Smith",
+"Street": "456 Delivery Rd",
+"PostCode": "2000",
+"City": "Aarhus",
+"CountryCode": "DK",
+"ShippingNotification": {
+"EmailAddress": "notify@example.com",
+"PhonePrefix": "+45",
+"PhoneNumber": "12345678"
+}
+}
+}
