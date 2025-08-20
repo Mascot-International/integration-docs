@@ -1,1 +1,217 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Invoice xmlns:cec="urn:oasis:names:specification:ubl:schema:xsd:CommonExtensionComponents-2" 
+         xmlns:cac="urn:oasis:names:specification:ubl:schema:xsd:CommonAggregateComponents-2" 
+         xmlns:cbc="urn:oasis:names:specification:ubl:schema:xsd:CommonBasicComponents-2" 
+         xmlns="urn:oasis:names:specification:ubl:schema:xsd:Invoice-2">
 
+  <cbc:CustomizationID>urn:cen.eu:en16931:2017#compliant#urn:xeinkauf.de:kosit:xrechnung_3.0</cbc:CustomizationID>
+  <cbc:ProfileID>urn:fdc:peppol.eu:2017:poacc:billing:01:1.0</cbc:ProfileID>
+  <cbc:ID>INVOICE-NUMBER</cbc:ID>
+  <cbc:IssueDate>YYYY-MM-DD</cbc:IssueDate>
+  <cbc:DueDate>YYYY-MM-DD</cbc:DueDate>
+  <cbc:InvoiceTypeCode>380</cbc:InvoiceTypeCode>
+  <cbc:DocumentCurrencyCode>EUR</cbc:DocumentCurrencyCode>
+  <cbc:BuyerReference>BUYER-REF-XXX</cbc:BuyerReference>
+
+  <cac:InvoicePeriod>
+    <cbc:StartDate>YYYY-MM-DD</cbc:StartDate>
+    <cbc:EndDate>YYYY-MM-DD</cbc:EndDate>
+  </cac:InvoicePeriod>
+
+  <cac:OrderReference>
+    <cbc:ID>ORDERREFERENCE-NUMBER</cbc:ID>
+    <cbc:SalesOrderID>ORDER-NUMBER</cbc:SalesOrderID>
+  </cac:OrderReference>
+
+  <cac:OriginatorDocumentReference>
+    <cbc:ID>INVOICE-NUMBER</cbc:ID>
+  </cac:OriginatorDocumentReference>
+
+  <cac:AccountingSupplierParty>
+    <cac:Party>
+      <cbc:EndpointID>SUPPLIER-ENDPOINT</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID>SUPPLIER-ID</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>Mascot International</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>[Street]</cbc:StreetName>
+        <cbc:CityName>[City]</cbc:CityName>
+        <cbc:PostalZone>[ZIP]</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>XX</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyTaxScheme>
+        <cbc:CompanyID>[Supplier VAT ID]</cbc:CompanyID>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:PartyTaxScheme>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>[Supplier Legal Name]</cbc:RegistrationName>
+        <cbc:CompanyID>[Supplier Company ID]</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+      <cac:Contact>
+        <cbc:Name>[Contact Name]</cbc:Name>
+        <cbc:ElectronicMail>[Email]</cbc:ElectronicMail>
+      </cac:Contact>
+    </cac:Party>
+  </cac:AccountingSupplierParty>
+
+  <cac:AccountingCustomerParty>
+    <cac:Party>
+      <cbc:EndpointID>CUSTOMER-ENDPOINT</cbc:EndpointID>
+      <cac:PartyIdentification>
+        <cbc:ID>CUSTOMER-ID</cbc:ID>
+      </cac:PartyIdentification>
+      <cac:PartyName>
+        <cbc:Name>[Customer Name]</cbc:Name>
+      </cac:PartyName>
+      <cac:PostalAddress>
+        <cbc:StreetName>[Street ]</cbc:StreetName>
+        <cbc:CityName>[City]</cbc:CityName>
+        <cbc:PostalZone>[ZIP]</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>FI</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:PostalAddress>
+      <cac:PartyLegalEntity>
+        <cbc:RegistrationName>[Customer Legal Name]</cbc:RegistrationName>
+        <cbc:CompanyID>[Customer Company ID]</cbc:CompanyID>
+      </cac:PartyLegalEntity>
+    </cac:Party>
+  </cac:AccountingCustomerParty>
+
+  <cac:PayeeParty>
+    <cac:PartyIdentification>
+      <cbc:ID>PAYEE-ID</cbc:ID>
+    </cac:PartyIdentification>
+    <cac:PartyName>
+      <cbc:Name>[Payee Name]</cbc:Name>
+    </cac:PartyName>
+  </cac:PayeeParty>
+
+  <cac:TaxRepresentativeParty>
+    <cac:PartyName>
+      <cbc:Name>[Tax Representative Name]</cbc:Name>
+    </cac:PartyName>
+    <cac:PostalAddress>
+      <cac:Country>
+        <cbc:IdentificationCode>XX</cbc:IdentificationCode>
+      </cac:Country>
+    </cac:PostalAddress>
+    <cac:PartyTaxScheme>
+      <cbc:CompanyID>[Tax Representative VAT ID]</cbc:CompanyID>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+      </cac:TaxScheme>
+    </cac:PartyTaxScheme>
+  </cac:TaxRepresentativeParty>
+
+  <cac:Delivery>
+    <cbc:ActualDeliveryDate>YYYY-MM-DD</cbc:ActualDeliveryDate>
+    <cac:DeliveryLocation>
+      <cac:Address>
+        <cbc:StreetName>[Street]</cbc:StreetName>
+        <cbc:CityName>[City]</cbc:CityName>
+        <cbc:PostalZone>[ZIP]</cbc:PostalZone>
+        <cac:Country>
+          <cbc:IdentificationCode>XX</cbc:IdentificationCode>
+        </cac:Country>
+      </cac:Address>
+    </cac:DeliveryLocation>
+    <cac:DeliveryParty>
+      <cac:PartyName>
+        <cbc:Name>[Delivery Party Name ]</cbc:Name>
+      </cac:PartyName>
+    </cac:DeliveryParty>
+  </cac:Delivery>
+
+  <cac:PaymentTerms>
+    <cbc:Note>[Payment terms between supplier and buyer]</cbc:Note>
+  </cac:PaymentTerms>
+
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReasonCode>HD</cbc:AllowanceChargeReasonCode>
+    <cbc:AllowanceChargeReason>Handling fee</cbc:AllowanceChargeReason>
+    <cbc:Amount currencyID="EUR">XX.XX</cbc:Amount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>XX.XX</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+      </cac:TaxScheme>
+    </cac:TaxCategory>
+  </cac:AllowanceCharge>
+
+  <cac:AllowanceCharge>
+    <cbc:ChargeIndicator>true</cbc:ChargeIndicator>
+    <cbc:AllowanceChargeReasonCode>FC</cbc:AllowanceChargeReasonCode>
+    <cbc:AllowanceChargeReason>Freight</cbc:AllowanceChargeReason>
+    <cbc:Amount currencyID="EUR">XX.XX</cbc:Amount>
+    <cac:TaxCategory>
+      <cbc:ID>S</cbc:ID>
+      <cbc:Percent>XX.XX</cbc:Percent>
+      <cac:TaxScheme>
+        <cbc:ID>VAT</cbc:ID>
+      </cac:TaxScheme>
+    </cac:TaxCategory>
+  </cac:AllowanceCharge>
+
+  <cac:TaxTotal>
+    <cbc:TaxAmount currencyID="EUR">XX.XX</cbc:TaxAmount>
+    <cac:TaxSubtotal>
+      <cbc:TaxableAmount currencyID="EUR">XX.XX</cbc:TaxableAmount>
+      <cbc:TaxAmount currencyID="EUR">XX.XX</cbc:TaxAmount>
+      <cac:TaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>XX.XX</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:TaxCategory>
+    </cac:TaxSubtotal>
+  </cac:TaxTotal>
+
+  <cac:LegalMonetaryTotal>
+    <cbc:LineExtensionAmount currencyID="EUR">XX.XX</cbc:LineExtensionAmount>
+    <cbc:TaxExclusiveAmount currencyID="EUR">XX.XX</cbc:TaxExclusiveAmount>
+    <cbc:TaxInclusiveAmount currencyID="EUR">XX.XX</cbc:TaxInclusiveAmount>
+    <cbc:ChargeTotalAmount currencyID="EUR">XX.XX</cbc:ChargeTotalAmount>
+    <cbc:PayableAmount currencyID="EUR">XX.XX</cbc:PayableAmount>
+  </cac:LegalMonetaryTotal>
+
+  <cac:InvoiceLine>
+    <cbc:ID>1</cbc:ID>
+    <cbc:InvoicedQuantity unitCode="C62">XX</cbc:InvoicedQuantity>
+    <cbc:LineExtensionAmount currencyID="EUR">XX.XX</cbc:LineExtensionAmount>
+    <cac:InvoicePeriod>
+      <cbc:StartDate>YYYY-MM-DD</cbc:StartDate>
+      <cbc:EndDate>YYYY-MM-DD</cbc:EndDate>
+    </cac:InvoicePeriod>
+    <cac:OrderLineReference>
+      <cbc:LineID>1</cbc:LineID>
+    </cac:OrderLineReference>
+    <cac:Item>
+      <cbc:Description>[Product Description]</cbc:Description>
+      <cbc:Name>[Product Name]</cbc:Name>
+      <cac:SellersItemIdentification>
+        <cbc:ID>EAN-NUMBER</cbc:ID>
+      </cac:SellersItemIdentification>
+      <cac:ClassifiedTaxCategory>
+        <cbc:ID>S</cbc:ID>
+        <cbc:Percent>XX.XX</cbc:Percent>
+        <cac:TaxScheme>
+          <cbc:ID>VAT</cbc:ID>
+        </cac:TaxScheme>
+      </cac:ClassifiedTaxCategory>
+    </cac:Item>
+    <cac:Price>
+      <cbc:PriceAmount currencyID="EUR">XX.XX</cbc:PriceAmount>
+    </cac:Price>
+  </cac:InvoiceLine>
+</Invoice>
