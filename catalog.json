@@ -6,7 +6,7 @@
         {
           "name": "Orders",
           "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API",
-          "notes": "JSON format on GitHub",
+          "notes": "JSON format",
           "connections": ["HTTP"]
         }
       ]
