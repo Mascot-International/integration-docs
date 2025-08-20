@@ -1,120 +1,210 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <title>Mascot Integration Catalog</title>
-  <style>
-    body { font-family: Arial, sans-serif; margin: 20px; }
-    header {
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      margin-bottom: 10px;
-    }
-    h1 { margin: 0; }
-    #logo { height: 50px; }
-    #searchBar {
-      width: 100%;
-      padding: 8px;
-      margin: 20px 0;
-      font-size: 16px;
-      border: 1px solid #ccc;
-      border-radius: 5px;
-    }
-    details { 
-      margin-bottom: 15px; 
-      border: 1px solid #ddd; 
-      border-radius: 5px; 
-      padding: 8px; 
-      background: #f9f9f9; 
-    }
-    summary { font-size: 18px; font-weight: bold; cursor: pointer; }
-    .format { margin-left: 20px; margin-top: 5px; }
-    a { text-decoration: none; color: #0066cc; }
-    a:hover { text-decoration: underline; }
-    .notes { font-style: italic; color: #555; margin-left: 5px; }
-    .connection-badge {
-      display: inline-block;
-      padding: 2px 6px;
-      margin-left: 5px;
-      border-radius: 4px;
-      color: white;
-      font-size: 12px;
-      font-weight: bold;
-    }
-    .sftp { background-color: #28a745; }
-    .ftp { background-color: #007bff; }
-    .email { background-color: #fd7e14; }
-    .http { background-color: #6f42c1; }
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mascot Integration Catalog</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+  header { display: flex; align-items: center; margin-bottom: 20px; }
+  header img { height: 50px; margin-right: 15px; }
+  h1 { margin: 0; }
+  .filter, .form-section { margin-bottom: 20px; padding: 15px; background: #fff; border-radius: 8px; box-shadow: 0 2px 5px rgba(0,0,0,0.1);}
+  .badge { display: inline-block; padding: 3px 8px; border-radius: 4px; color: white; margin: 2px; font-size: 0.85em;}
+  .HTTP { background: #007bff; }
+  .SFTP { background: #28a745; }
+  .FTP { background: #ffc107; color: #000; }
+  .EMAIL { background: #dc3545; }
+  select, input, button { padding: 5px; margin: 5px 0; width: 100%; max-width: 400px; }
+  button { cursor: pointer; background: #007bff; color: #fff; border: none; border-radius: 4px; }
+  .catalog-item { margin-bottom: 10px; padding: 10px; border-bottom: 1px solid #ddd; }
+</style>
 </head>
 <body>
-<header style="display: flex; align-items: center; margin-bottom: 10px;">
-  <img id="logo" src="images/mascot-logo.png" alt="Mascot Logo" style="height: 50px; margin-right: 15px;">
-  <h1 style="margin: 0;">Mascot Integration Catalog</h1>
+
+<header>
+  <img src="mascot_logo.png" alt="Mascot Logo">
+  <h1>Mascot Integration Catalog</h1>
 </header>
 
-  <input type="text" id="searchBar" placeholder="Search categories, formats, or connections...">
-  <div id="catalog"></div>
+<div class="filter">
+  <h2>Filter Integrations</h2>
+  <label>Category:</label>
+  <select id="categoryFilter">
+    <option value="">All</option>
+  </select>
+  <label>Format:</label>
+  <select id="formatFilter">
+    <option value="">All</option>
+  </select>
+  <label>Connection:</label>
+  <select id="connectionFilter">
+    <option value="">All</option>
+    <option value="HTTP">HTTP</option>
+    <option value="SFTP">SFTP</option>
+    <option value="FTP">FTP</option>
+    <option value="EMAIL">EMAIL</option>
+  </select>
+</div>
 
-  <script>
-    let catalogData = [];
+<div id="catalog"></div>
 
-    async function loadCatalog() {
-      const response = await fetch("catalog.json");
-      catalogData = await response.json();
-      renderCatalog(catalogData.categories);
-    }
+<div class="form-section">
+  <h2>Request Integration</h2>
+  <form id="integrationForm">
+    <label>Company Name:</label>
+    <input type="text" name="company" required>
+    
+    <label>Existing or New Mascot Customer?</label>
+    <select name="customerType" required>
+      <option value="">Select</option>
+      <option value="Existing">Existing</option>
+      <option value="New">New</option>
+    </select>
 
-    function renderCatalog(categories) {
-      const container = document.getElementById("catalog");
-      container.innerHTML = "";
+    <label>Integration Type:</label>
+    <select id="integrationType" name="integrationType" required>
+      <option value="">Select</option>
+    </select>
 
-      categories.forEach(category => {
-        const details = document.createElement("details");
-        const summary = document.createElement("summary");
-        summary.textContent = category.name;
-        details.appendChild(summary);
+    <label>Format(s):</label>
+    <select id="integrationFormat" name="integrationFormat" multiple required></select>
 
-        category.formats.forEach(f => {
-          const formatEl = document.createElement("div");
-          formatEl.className = "format";
+    <label>Connection(s):</label>
+    <select id="integrationConnection" name="integrationConnection" multiple required></select>
 
-          let html = `<strong>${f.name}</strong> - <a href="${f.docUrl}" target="_blank">${f.docUrl}</a>`;
+    <label>Technical Contact (Name + Email):</label>
+    <input type="text" name="contact" placeholder="Name + Email" required>
 
-          if (f.notes) html += ` <span class="notes">(${f.notes})</span>`;
+    <label>Proposed Go-Live Date:</label>
+    <input type="date" name="goLiveDate" required>
 
-          if (f.connections && f.connections.length > 0) {
-            const badges = f.connections
-              .map(conn => `<span class="connection-badge ${conn.toLowerCase()}">${conn}</span>`)
-              .join(" ");
-            html += ` <span class="notes">Connections: ${badges}</span>`;
-          }
+    <button type="submit">Submit Request</button>
+  </form>
+</div>
 
-          formatEl.innerHTML = html;
-          details.appendChild(formatEl);
-        });
+<script>
+// Load catalog.json
+let catalog = null;
 
-        container.appendChild(details);
-      });
-    }
+fetch('catalog.json')
+  .then(res => res.json())
+  .then(data => {
+    catalog = data.categories;
+    populateFilters();
+    populateIntegrationForm();
+    displayCatalog();
+  });
 
-    document.getElementById("searchBar").addEventListener("input", function() {
-      const query = this.value.toLowerCase();
-      const filtered = catalogData.categories.map(cat => {
-        const matchedFormats = cat.formats.filter(f =>
-          f.name.toLowerCase().includes(query) ||
-          (f.notes && f.notes.toLowerCase().includes(query)) ||
-          (f.connections && f.connections.some(c => c.toLowerCase().includes(query))) ||
-          cat.name.toLowerCase().includes(query)
-        );
-        return matchedFormats.length > 0 ? { ...cat, formats: matchedFormats } : null;
-      }).filter(Boolean);
+function populateFilters() {
+  const catSelect = document.getElementById('categoryFilter');
+  catalog.forEach(cat => {
+    let opt = document.createElement('option');
+    opt.value = cat.name;
+    opt.textContent = cat.name;
+    catSelect.appendChild(opt);
+  });
+}
 
-      renderCatalog(filtered);
+function populateIntegrationForm() {
+  const typeSelect = document.getElementById('integrationType');
+  catalog.forEach(cat => {
+    let opt = document.createElement('option');
+    opt.value = cat.name;
+    opt.textContent = cat.name;
+    typeSelect.appendChild(opt);
+  });
+}
+
+function displayCatalog() {
+  const container = document.getElementById('catalog');
+  container.innerHTML = '';
+  const catVal = document.getElementById('categoryFilter').value;
+  const fmtVal = document.getElementById('formatFilter').value;
+  const connVal = document.getElementById('connectionFilter').value;
+
+  catalog.forEach(cat => {
+    if(catVal && cat.name !== catVal) return;
+    cat.formats.forEach(fmt => {
+      if(fmtVal && fmt.name !== fmtVal) return;
+      if(connVal && !fmt.connections.includes(connVal)) return;
+
+      let html = `<div class="catalog-item"><strong>${fmt.name}</strong> - <a href="${fmt.docUrl}" target="_blank">LINK</a><br>`;
+      fmt.connections.forEach(c => html += `<span class="badge ${c}">${c}</span>`);
+      html += '</div>';
+      container.innerHTML += html;
     });
+  });
+}
 
-    loadCatalog();
-  </script>
+// Filter events
+document.getElementById('categoryFilter').addEventListener('change', displayCatalog);
+document.getElementById('formatFilter').addEventListener('change', displayCatalog);
+document.getElementById('connectionFilter').addEventListener('change', displayCatalog);
+
+// Smart multi-select logic
+const typeSelect = document.getElementById('integrationType');
+const formatSelect = document.getElementById('integrationFormat');
+const connectionSelect = document.getElementById('integrationConnection');
+
+typeSelect.addEventListener('change', updateFormats);
+formatSelect.addEventListener('change', updateConnections);
+
+function updateFormats() {
+  const type = typeSelect.value;
+  formatSelect.innerHTML = '';
+  connectionSelect.innerHTML = '';
+  if(!type) return;
+  const category = catalog.find(c => c.name === type);
+  category.formats.forEach(f => {
+    const opt = document.createElement('option');
+    opt.value = f.name;
+    opt.textContent = f.name;
+    formatSelect.appendChild(opt);
+  });
+}
+
+function updateConnections() {
+  const type = typeSelect.value;
+  const selectedFormats = Array.from(formatSelect.selectedOptions).map(o => o.value);
+  connectionSelect.innerHTML = '';
+  if(!type || selectedFormats.length === 0) return;
+  const category = catalog.find(c => c.name === type);
+
+  // Determine available connections: intersection of selected formats
+  let available = null;
+  selectedFormats.forEach(fName => {
+    const fmt = category.formats.find(f => f.name === fName);
+    if(!available) available = [...fmt.connections];
+    else available = available.filter(c => fmt.connections.includes(c));
+  });
+
+  available.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    connectionSelect.appendChild(opt);
+  });
+}
+
+// Lobster form submission
+document.getElementById('integrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+  const formData = new FormData(e.target);
+  const payload = {};
+  formData.forEach((v,k) => { payload[k] = v; });
+
+  // Here you would send payload to Lobster API to create Jira ticket
+  fetch('https://your-lobster-endpoint.com/api', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify(payload)
+  })
+  .then(res => res.json())
+  .then(data => alert('Integration request submitted!'))
+  .catch(err => alert('Error submitting request'));
+});
+</script>
+
 </body>
 </html>
