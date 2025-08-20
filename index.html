@@ -9,13 +9,16 @@
   header { display: flex; align-items: center; margin-bottom: 20px; }
   header img { height: 60px; margin-right: 15px; }
   h1 { margin: 0; }
-  .category { margin-bottom: 30px; }
-  .format { margin-left: 20px; margin-bottom: 5px; }
+  #searchInput { width: 100%; padding: 8px; margin-bottom: 20px; font-size: 1em; }
+  .category { margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
+  .category h2 { cursor: pointer; margin: 0; }
+  .formats { margin-left: 20px; display: none; }
+  .format { margin-bottom: 5px; }
   .badge { display: inline-block; padding: 3px 6px; margin-right: 5px; border-radius: 4px; background-color: #eee; font-size: 0.9em; }
   .form-section { margin-top: 40px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; max-width: 600px; }
   label { display: block; margin-top: 10px; }
   select, input { width: 100%; padding: 6px; margin-top: 5px; }
-  button { margin-top: 15px; padding: 10px 15px; font-size: 1em; }
+  button { margin-top: 15px; padding: 10px 15px; font-size: 1em; cursor: pointer; }
 </style>
 </head>
 <body>
@@ -24,6 +27,8 @@
   <img src="logo.png" alt="Mascot Logo">
   <h1>Mascot Integration Catalog</h1>
 </header>
+
+<input type="text" id="searchInput" placeholder="Search formats...">
 
 <div id="catalog"></div>
 
@@ -67,7 +72,7 @@
 
 <script>
 let catalogData = {};
-let requestCounts = {}; // IP-like tracking (front-end only)
+let requestCounts = {}; // Front-end "IP-like" tracking
 
 // Load catalog.json
 fetch('catalog.json')
@@ -78,14 +83,22 @@ fetch('catalog.json')
     populateIntegrationTypes(data);
   });
 
+// Render collapsible catalog
 function renderCatalog(data) {
   const container = document.getElementById('catalog');
   data.categories.forEach(cat => {
     const catDiv = document.createElement('div');
     catDiv.className = 'category';
+
     const catTitle = document.createElement('h2');
     catTitle.textContent = cat.name;
-    catDiv.appendChild(catTitle);
+
+    const formatsDiv = document.createElement('div');
+    formatsDiv.className = 'formats';
+
+    catTitle.addEventListener('click', () => {
+      formatsDiv.style.display = formatsDiv.style.display === 'none' ? 'block' : 'none';
+    });
 
     cat.formats.forEach(fmt => {
       const fmtDiv = document.createElement('div');
@@ -97,13 +110,24 @@ function renderCatalog(data) {
         badge.textContent = conn;
         fmtDiv.appendChild(badge);
       });
-      catDiv.appendChild(fmtDiv);
+      formatsDiv.appendChild(fmtDiv);
     });
+
+    catDiv.appendChild(catTitle);
+    catDiv.appendChild(formatsDiv);
     container.appendChild(catDiv);
   });
 }
 
-// Populate integration types dropdown
+// Search functionality
+document.getElementById('searchInput').addEventListener('input', (e) => {
+  const term = e.target.value.toLowerCase();
+  document.querySelectorAll('.format').forEach(f => {
+    f.style.display = f.textContent.toLowerCase().includes(term) ? 'block' : 'none';
+  });
+});
+
+// Populate integration type dropdown
 function populateIntegrationTypes(data) {
   const select = document.getElementById('integrationType');
   data.categories.forEach(cat => {
@@ -142,7 +166,7 @@ formatSelectEl.addEventListener('change', () => {
   const cat = catalogData.categories.find(c => c.name === selectedType);
   if (!cat) return;
 
-  // Determine connections allowed: intersection of all selected formats
+  // Intersection of connections
   let allowedConnections = null;
   selectedFormats.forEach(fmtName => {
     const fmt = cat.formats.find(f => f.name === fmtName);
@@ -150,7 +174,6 @@ formatSelectEl.addEventListener('change', () => {
     else allowedConnections = allowedConnections.filter(c => fmt.connections.includes(c));
   });
 
-  // Populate connection dropdown
   connectionSelectEl.innerHTML = '';
   allowedConnections.forEach(conn => {
     const opt = document.createElement('option');
@@ -160,7 +183,7 @@ formatSelectEl.addEventListener('change', () => {
   });
 });
 
-// Simple front-end anti-bot limit & CAPTCHA
+// Simple front-end CAPTCHA & request limit
 document.getElementById('integrationForm').addEventListener('submit', e => {
   e.preventDefault();
   const captchaVal = document.getElementById('captcha').value.trim();
