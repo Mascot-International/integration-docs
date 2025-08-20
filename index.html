@@ -5,20 +5,24 @@
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mascot Integration Catalog</title>
 <style>
-  body { font-family: Arial, sans-serif; margin: 20px; }
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
   header { display: flex; align-items: center; margin-bottom: 20px; }
   header img { height: 60px; margin-right: 15px; }
   h1 { margin: 0; }
-  #searchInput { width: 100%; padding: 8px; margin-bottom: 20px; font-size: 1em; }
-  .category { margin-bottom: 20px; border-bottom: 1px solid #ccc; padding-bottom: 10px; }
-  .category h2 { cursor: pointer; margin: 0; }
-  .formats { margin-left: 20px; display: none; }
-  .format { margin-bottom: 5px; }
-  .badge { display: inline-block; padding: 3px 6px; margin-right: 5px; border-radius: 4px; background-color: #eee; font-size: 0.9em; }
-  .form-section { margin-top: 40px; padding: 20px; border: 1px solid #ccc; border-radius: 10px; max-width: 600px; }
-  label { display: block; margin-top: 10px; }
-  select, input { width: 100%; padding: 6px; margin-top: 5px; }
-  button { margin-top: 15px; padding: 10px 15px; font-size: 1em; cursor: pointer; }
+  #searchInput { width: 100%; padding: 8px; margin-bottom: 20px; font-size: 1em; border-radius: 6px; border: 1px solid #ccc; }
+  .category { margin-bottom: 20px; background: #fff; border-radius: 8px; padding: 10px 15px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+  .category h2 { cursor: pointer; margin: 0; padding: 10px 0; font-size: 1.2em; }
+  .formats { margin-left: 15px; display: none; }
+  .format { margin-bottom: 8px; padding: 5px 0; }
+  .format a { color: #007bff; text-decoration: none; }
+  .format a:hover { text-decoration: underline; }
+  .badge { display: inline-block; padding: 3px 8px; margin-right: 5px; border-radius: 12px; font-size: 0.85em; color: #fff; }
+  .SFTP { background-color: #ff6b6b; }
+  .FTP { background-color: #ffa94d; }
+  .HTTP { background-color: #339af0; }
+  .EMAIL { background-color: #51cf66; }
+  #requestButton { display: inline-block; margin-top: 30px; padding: 12px 20px; background: #339af0; color: #fff; border-radius: 6px; text-decoration: none; font-size: 1em; }
+  #requestButton:hover { background: #1c7ed6; }
 </style>
 </head>
 <body>
@@ -32,47 +36,10 @@
 
 <div id="catalog"></div>
 
-<div class="form-section">
-  <h2>Request Integration</h2>
-  <form id="integrationForm">
-    <label>Company Name
-      <input type="text" name="companyName" required>
-    </label>
-    <label>Existing or New Mascot Customer?
-      <select name="customerType" required>
-        <option value="Existing">Existing</option>
-        <option value="New">New</option>
-      </select>
-    </label>
-    <label>Integration Type
-      <select name="integrationType" id="integrationType" required>
-        <option value="">--Select--</option>
-      </select>
-    </label>
-    <label>Formats
-      <select name="format" id="formatSelect" required multiple></select>
-    </label>
-    <label>Connection Type
-      <select name="connectionType" id="connectionSelect" required></select>
-    </label>
-    <label>Technical Contact (Name + Email)
-      <input type="text" name="technicalContact" required>
-    </label>
-    <label>Proposed Go-Live Date
-      <input type="date" name="goLiveDate" required>
-    </label>
-    <!-- Simple front-end CAPTCHA -->
-    <label>What is 3 + 4? (Anti-bot)
-      <input type="text" id="captcha" required>
-    </label>
-    <button type="submit">Submit Request</button>
-    <p id="formMessage" style="color:red;"></p>
-  </form>
-</div>
+<a id="requestButton" href="contact.html">Request Integration</a>
 
 <script>
 let catalogData = {};
-let requestCounts = {}; // Front-end "IP-like" tracking
 
 // Load catalog.json
 fetch('catalog.json')
@@ -80,7 +47,6 @@ fetch('catalog.json')
   .then(data => {
     catalogData = data;
     renderCatalog(data);
-    populateIntegrationTypes(data);
   });
 
 // Render collapsible catalog
@@ -106,7 +72,7 @@ function renderCatalog(data) {
       fmtDiv.innerHTML = `<strong>${fmt.name}</strong> - <a href="${fmt.docUrl}" target="_blank">${fmt.docUrl}</a>`;
       fmt.connections.forEach(conn => {
         const badge = document.createElement('span');
-        badge.className = 'badge';
+        badge.className = `badge ${conn}`;
         badge.textContent = conn;
         fmtDiv.appendChild(badge);
       });
@@ -125,88 +91,6 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   document.querySelectorAll('.format').forEach(f => {
     f.style.display = f.textContent.toLowerCase().includes(term) ? 'block' : 'none';
   });
-});
-
-// Populate integration type dropdown
-function populateIntegrationTypes(data) {
-  const select = document.getElementById('integrationType');
-  data.categories.forEach(cat => {
-    const option = document.createElement('option');
-    option.value = cat.name;
-    option.textContent = cat.name;
-    select.appendChild(option);
-  });
-}
-
-// Smart form logic
-const integrationTypeEl = document.getElementById('integrationType');
-const formatSelectEl = document.getElementById('formatSelect');
-const connectionSelectEl = document.getElementById('connectionSelect');
-
-integrationTypeEl.addEventListener('change', () => {
-  const selectedType = integrationTypeEl.value;
-  formatSelectEl.innerHTML = '';
-  connectionSelectEl.innerHTML = '';
-
-  const cat = catalogData.categories.find(c => c.name === selectedType);
-  if (!cat) return;
-
-  cat.formats.forEach(fmt => {
-    const opt = document.createElement('option');
-    opt.value = fmt.name;
-    opt.textContent = fmt.name;
-    formatSelectEl.appendChild(opt);
-  });
-});
-
-formatSelectEl.addEventListener('change', () => {
-  const selectedType = integrationTypeEl.value;
-  const selectedFormats = Array.from(formatSelectEl.selectedOptions).map(o => o.value);
-
-  const cat = catalogData.categories.find(c => c.name === selectedType);
-  if (!cat) return;
-
-  // Intersection of connections
-  let allowedConnections = null;
-  selectedFormats.forEach(fmtName => {
-    const fmt = cat.formats.find(f => f.name === fmtName);
-    if (!allowedConnections) allowedConnections = [...fmt.connections];
-    else allowedConnections = allowedConnections.filter(c => fmt.connections.includes(c));
-  });
-
-  connectionSelectEl.innerHTML = '';
-  allowedConnections.forEach(conn => {
-    const opt = document.createElement('option');
-    opt.value = conn;
-    opt.textContent = conn;
-    connectionSelectEl.appendChild(opt);
-  });
-});
-
-// Simple front-end CAPTCHA & request limit
-document.getElementById('integrationForm').addEventListener('submit', e => {
-  e.preventDefault();
-  const captchaVal = document.getElementById('captcha').value.trim();
-  if (captchaVal !== '7') {
-    document.getElementById('formMessage').textContent = 'CAPTCHA incorrect!';
-    return;
-  }
-
-  const formData = new FormData(e.target);
-  const requestKey = formData.get('companyName').toLowerCase(); // rough "IP-like" key
-  if (!requestCounts[requestKey]) requestCounts[requestKey] = 0;
-  requestCounts[requestKey]++;
-  if (requestCounts[requestKey] > 3) {
-    document.getElementById('formMessage').textContent = 'Too many requests from this company!';
-    return;
-  }
-
-  // TODO: Send to Lobster/Jira API endpoint
-  console.log('Form submitted:', Object.fromEntries(formData.entries()));
-  alert('Integration request submitted!');
-  e.target.reset();
-  formatSelectEl.innerHTML = '';
-  connectionSelectEl.innerHTML = '';
 });
 </script>
 
