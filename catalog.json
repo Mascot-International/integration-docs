@@ -1,0 +1,70 @@
+{
+  "categories": [
+    {
+      "name": "API",
+      "formats": [
+        {
+          "name": "Orders",
+          "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API",
+          "notes": "JSON format on GitHub"
+        }
+      ],
+      "connections": ["HTTP(S) API"]
+    },
+    {
+      "name": "EDIFACT",
+      "formats": [
+        { "name": "ORDERS", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS" },
+        { "name": "ORDRSP", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDRSP" },
+        { "name": "INVOIC", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/INVOIC" },
+        { "name": "DESADV", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/DESADV" }
+      ],
+      "connections": ["SFTP", "FTP", "Email", "HTTP(S) API"]
+    },
+    {
+      "name": "XML",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Orders" },
+        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Order%20Response" },
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Invoice" },
+        { "name": "Dispatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Dispatch%20Advice" }
+      ],
+      "connections": ["SFTP", "FTP", "Email", "HTTP(S) API"]
+    },
+    {
+      "name": "OIOUBL",
+      "formats": [
+        {
+          "name": "Invoice",
+          "docUrl": "https://docs.oasis-open.org/ubl/os-UBL-2.1/xml/UBL-Invoice-2.1-Example.xml",
+          "notes": "Version 2.02"
+        }
+      ],
+      "connections": ["SFTP", "FTP", "Email"]
+    },
+    {
+      "name": "Xrechnung",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/Xrechnung" }
+      ],
+      "connections": ["SFTP", "FTP", "Email", "HTTP(S) API"]
+    },
+    {
+      "name": "ZUGFeRD",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/ZUGFeRD" }
+      ],
+      "connections": ["Email", "SFTP"]
+    },
+    {
+      "name": "TBD",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://www.w3.org/XML/" },
+        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact" },
+        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" },
+        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/" }
+      ],
+      "connections": ["TBD"]
+    }
+  ]
+}
