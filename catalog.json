@@ -9,19 +9,19 @@
     {
       "name": "EDIFACT",
       "formats": [
-        { "name": "Orders", "docUrl": "https://www.w3.org/XML/" },
-        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact" },
-        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" },
-        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/" }
+        { "name": "ORDERS", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS" },
+        { "name": "ORDRSP", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDRSP" },
+        { "name": "INVOIC", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/INVOIC" },
+        { "name": "DESADV", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/DESADV" }
       ]
     },
     {
       "name": "XML",
       "formats": [
-        { "name": "Orders", "docUrl": "https://www.w3.org/XML/", "notes": "Includes PDF Specification, XSD and 4 example files" },
-        { "name": "Order Response", "docUrl": "https://unece.org/trade/uncefact/unedifact" },
-        { "name": "Invoice", "docUrl": "https://www.opentrans.org/" },
-        { "name": "Dispatch Advice", "docUrl": "https://www.opentrans.org/" }
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Orders" },
+        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Order%20Response" },
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Invoice" },
+        { "name": "Dispatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/Dispatch%20Advice" }
       ]
     },
     {
@@ -33,13 +33,13 @@
     {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://en.e-rechnung-bund.de/e-invoicing-faq/xrechnung/" }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/Xrechnung" }
       ]
     },
     {
       "name": "ZUGFeRD",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://www.ferd-net.de/en/standards/zugferd/factur-x" }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/ZUGFeRD" }
       ]
     },
     {
