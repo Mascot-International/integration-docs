@@ -116,7 +116,7 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   }
 
   // Send data to the serverless API
-  fetch('https://YOUR_VERCEL_PROJECT.vercel.app/api/jira-create', {
+  fetch('https://integration-docs-olive.vercel.app/api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
