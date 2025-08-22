@@ -125,7 +125,7 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   }
 
   // Send to serverless proxy for Jira integration
-  fetch('https://your-vercel-deployment.vercel.app/api/jira-create', {
+  fetch('https://integration-docs-olive.vercel.app//api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
