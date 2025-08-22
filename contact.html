@@ -24,7 +24,7 @@
 
 <header>
   <img src="images/mascot-logo.png" alt="Mascot Logo">
-  <h1>Request Integration</h1>
+  <h1>Mascot Request Integration</h1>
 </header>
 
 <form id="integrationForm">
@@ -55,7 +55,7 @@
 </form>
 
 <script>
-// Load catalog.json for dynamic fields
+// Load catalog.json dynamically
 let catalogData = {};
 fetch('catalog.json')
   .then(res => res.json())
@@ -70,33 +70,24 @@ fetch('catalog.json')
     });
   });
 
-// Update message types when a format is selected
+// Dynamically update message types
 document.getElementById('formatType').addEventListener('change', function() {
   const selected = this.value;
   const msgContainer = document.getElementById('messageTypes');
   msgContainer.innerHTML = '';
   if (!selected) return;
-
   const category = catalogData.categories.find(c => c.name === selected);
   category.formats.forEach(fmt => {
-    const wrapper = document.createElement('div');
-    const checkbox = document.createElement('input');
-    checkbox.type = 'checkbox';
-    checkbox.name = 'messageTypes';
-    checkbox.value = fmt.name;
-    checkbox.id = `msg-${fmt.name}`;
-
-    const label = document.createElement('label');
-    label.htmlFor = `msg-${fmt.name}`;
-    label.textContent = fmt.name;
-
-    wrapper.appendChild(checkbox);
-    wrapper.appendChild(label);
-    msgContainer.appendChild(wrapper);
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <input type="checkbox" id="msg-${fmt.name}" name="messageTypes" value="${fmt.name}">
+      <label for="msg-${fmt.name}">${fmt.name}</label>
+    `;
+    msgContainer.appendChild(div);
   });
 });
 
-// Handle form submission securely
+// Handle form submission
 document.getElementById('integrationForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -108,24 +99,24 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   const notes = document.getElementById('notes').value;
   const recaptcha = grecaptcha.getResponse();
 
-  const responseMsg = document.getElementById('responseMessage');
-  responseMsg.className = '';
-  responseMsg.textContent = '';
+  const responseMessage = document.getElementById('responseMessage');
+  responseMessage.className = '';
+  responseMessage.textContent = '';
 
   if (!formatType || messages.length === 0) {
-    responseMsg.textContent = 'Please select a format type and at least one message type.';
-    responseMsg.className = 'error';
+    responseMessage.textContent = 'Please select a format type and at least one message type.';
+    responseMessage.className = 'error';
     return;
   }
 
   if (!recaptcha) {
-    responseMsg.textContent = 'Please complete the reCAPTCHA.';
-    responseMsg.className = 'error';
+    responseMessage.textContent = 'Please complete the reCAPTCHA.';
+    responseMessage.className = 'error';
     return;
   }
 
-  // Send to serverless proxy for Jira integration
-  fetch('https://integration-docs-olive.vercel.app//api/jira-create', {
+  // Send data to the serverless API
+  fetch('https://YOUR_VERCEL_PROJECT.vercel.app/api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
@@ -133,19 +124,19 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   .then(res => res.json())
   .then(resp => {
     if (resp.success) {
-      responseMsg.textContent = 'Request submitted successfully!';
-      responseMsg.className = 'success';
+      responseMessage.textContent = 'Request submitted successfully!';
+      responseMessage.className = 'success';
       document.getElementById('integrationForm').reset();
-      grecaptcha.reset();
       document.getElementById('messageTypes').innerHTML = '';
+      grecaptcha.reset();
     } else {
-      responseMsg.textContent = resp.error || 'Submission failed.';
-      responseMsg.className = 'error';
+      responseMessage.textContent = resp.error || 'Submission failed.';
+      responseMessage.className = 'error';
     }
   })
   .catch(() => {
-    responseMsg.textContent = 'Submission failed.';
-    responseMsg.className = 'error';
+    responseMessage.textContent = 'Submission failed.';
+    responseMessage.className = 'error';
   });
 });
 </script>
