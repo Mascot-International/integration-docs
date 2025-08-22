@@ -55,7 +55,7 @@
 </form>
 
 <script>
-// Load catalog.json dynamically
+// Load catalog.json for dynamic fields
 let catalogData = {};
 fetch('catalog.json')
   .then(res => res.json())
@@ -70,14 +70,16 @@ fetch('catalog.json')
     });
   });
 
-// Update message types dynamically
+// Update message types when a format is selected
 document.getElementById('formatType').addEventListener('change', function() {
   const selected = this.value;
   const msgContainer = document.getElementById('messageTypes');
   msgContainer.innerHTML = '';
   if (!selected) return;
+
   const category = catalogData.categories.find(c => c.name === selected);
   category.formats.forEach(fmt => {
+    const wrapper = document.createElement('div');
     const checkbox = document.createElement('input');
     checkbox.type = 'checkbox';
     checkbox.name = 'messageTypes';
@@ -88,14 +90,13 @@ document.getElementById('formatType').addEventListener('change', function() {
     label.htmlFor = `msg-${fmt.name}`;
     label.textContent = fmt.name;
 
-    const div = document.createElement('div');
-    div.appendChild(checkbox);
-    div.appendChild(label);
-    msgContainer.appendChild(div);
+    wrapper.appendChild(checkbox);
+    wrapper.appendChild(label);
+    msgContainer.appendChild(wrapper);
   });
 });
 
-// Handle form submission
+// Handle form submission securely
 document.getElementById('integrationForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
@@ -107,20 +108,24 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   const notes = document.getElementById('notes').value;
   const recaptcha = grecaptcha.getResponse();
 
+  const responseMsg = document.getElementById('responseMessage');
+  responseMsg.className = '';
+  responseMsg.textContent = '';
+
   if (!formatType || messages.length === 0) {
-    document.getElementById('responseMessage').textContent = 'Please select a format type and at least one message type.';
-    document.getElementById('responseMessage').className = 'error';
+    responseMsg.textContent = 'Please select a format type and at least one message type.';
+    responseMsg.className = 'error';
     return;
   }
 
   if (!recaptcha) {
-    document.getElementById('responseMessage').textContent = 'Please complete the reCAPTCHA.';
-    document.getElementById('responseMessage').className = 'error';
+    responseMsg.textContent = 'Please complete the reCAPTCHA.';
+    responseMsg.className = 'error';
     return;
   }
 
-  // Send data to eProxy
-  fetch('/eproxy/lobster_request', {
+  // Send to serverless proxy for Jira integration
+  fetch('https://your-vercel-deployment.vercel.app/api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
@@ -128,19 +133,19 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   .then(res => res.json())
   .then(resp => {
     if (resp.success) {
-      document.getElementById('responseMessage').textContent = 'Request submitted successfully!';
-      document.getElementById('responseMessage').className = 'success';
-      this.reset();
+      responseMsg.textContent = 'Request submitted successfully!';
+      responseMsg.className = 'success';
+      document.getElementById('integrationForm').reset();
       grecaptcha.reset();
       document.getElementById('messageTypes').innerHTML = '';
     } else {
-      document.getElementById('responseMessage').textContent = resp.error || 'Submission failed.';
-      document.getElementById('responseMessage').className = 'error';
+      responseMsg.textContent = resp.error || 'Submission failed.';
+      responseMsg.className = 'error';
     }
   })
   .catch(() => {
-    document.getElementById('responseMessage').textContent = 'Submission failed.';
-    document.getElementById('responseMessage').className = 'error';
+    responseMsg.textContent = 'Submission failed.';
+    responseMsg.className = 'error';
   });
 });
 </script>
