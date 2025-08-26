@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<ORDER>
+<Header>
+	<Ordertype>ZE</Ordertype>
+	<BuyerID>5790001294939</BuyerID>
+ 	<PreferredDeliveryDate>2025-01-23</PreferredDeliveryDate>
+	<OrderReference>Test_Ref_4</OrderReference>
+	<IssueEmail>testuser@mascot.dk</IssueEmail>
+	<NonStandardDelivery>
+		<DeliveryByNumber></DeliveryByNumber>
+		<DeliveryByAddress>
+		<Name></Name>
+		<Address></Address>
+		<CountryCode></CountryCode>
+		<PostCode></PostCode>
+		<City></City>
+		</DeliveryByAddress>
+	</NonStandardDelivery>
+</Header>
+  <OrderLine>
+      <BuyersLineReference>Customer_Line_Ref-1</BuyersLineReference>
+      <SuppliersEANCode>5707209807540</SuppliersEANCode>
+	<SuppliersMaterialNumber>00782-250-18 2XL</SuppliersMaterialNumber>
+	<ProductDescription>MASCOT® Java</ProductDescription>
+  <Quantity>5</Quantity>
+</OrderLine>
+  <OrderLine>
+	<BuyersLineReference>Customer_Line_Ref-2</BuyersLineReference>
+	<SuppliersEANCode>5708628288927</SuppliersEANCode>
+	<SuppliersMaterialNumber>00784-280-01 S</SuppliersMaterialNumber>
+	<ProductDescription>MASCOT® Caribien</ProductDescription>
+    <Quantity>2</Quantity>
+</OrderLine>
+<Dropshipment>
+	<DeliveryType>Z01</DeliveryType>
+	<DepositLocation>Door Backyard</DepositLocation>
+	<Name>Fullname</Name>
+	<Street>Silkeborgvej 12</Street>
+	<PostCode>7000</PostCode>
+	<City>Silkeborg</City>
+	<CountryCode>DK</CountryCode>
+	<ShippingNotification>
+		<EmailAddress>testuser@mascot.dk</EmailAddress>
+		<PhonePrefix>+45</PhonePrefix>
+		<PhoneNumber>12345678</PhoneNumber>
+	</ShippingNotification>
+</Dropshipment>
+</ORDER>
