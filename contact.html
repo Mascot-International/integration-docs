@@ -50,7 +50,7 @@
 
   <div class="g-recaptcha" data-sitekey="6Lf3nK4rAAAAACTVh8pHOhpShI8XK8ZZdg7mdwgJ"></div>
 
-  <button type="submit">Submit Request</button>
+  <button type="submit" id="submitButton">Submit Request</button>
   <div id="responseMessage"></div>
 </form>
 
@@ -92,6 +92,9 @@ document.getElementById('formatType').addEventListener('change', function() {
 document.getElementById('integrationForm').addEventListener('submit', function(e) {
   e.preventDefault();
 
+  const submitButton = document.getElementById('submitButton');
+  submitButton.disabled = true; // Disable to prevent double submission
+
   const formatType = document.getElementById('formatType').value;
   const messages = Array.from(document.querySelectorAll('input[name="messageTypes"]:checked')).map(c => c.value);
   const name = document.getElementById('name').value;
@@ -107,17 +110,19 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
   if (!formatType || messages.length === 0) {
     responseMessage.textContent = 'Please select a format type and at least one message type.';
     responseMessage.className = 'error';
+    submitButton.disabled = false;
     return;
   }
 
   if (!recaptcha) {
     responseMessage.textContent = 'Please complete the reCAPTCHA.';
     responseMessage.className = 'error';
+    submitButton.disabled = false;
     return;
   }
 
   // Send data to serverless Jira function
-  fetch('/api/jira-create', {
+  fetch('https://integration-docs-olive.vercel.app/api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
     body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
@@ -134,10 +139,12 @@ document.getElementById('integrationForm').addEventListener('submit', function(e
       responseMessage.textContent = resp.error || 'Submission failed.';
       responseMessage.className = 'error';
     }
+    submitButton.disabled = false; // Re-enable button
   })
   .catch(() => {
     responseMessage.textContent = 'Submission failed.';
     responseMessage.className = 'error';
+    submitButton.disabled = false; // Re-enable button
   });
 });
 </script>
