@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Request Integration - Mascot</title>
+<style>
+  body { font-family: Arial, sans-serif; margin: 20px; background: #f9f9f9; }
+  header { display: flex; align-items: center; margin-bottom: 20px; }
+  header img { height: 60px; margin-right: 15px; }
+  h1 { margin: 0; }
+  form { background: #fff; padding: 20px; border-radius: 8px; max-width: 600px; box-shadow: 0 2px 4px rgba(0,0,0,0.05); }
+  label { display: block; margin-top: 15px; font-weight: bold; }
+  select, input, textarea { width: 100%; padding: 8px; margin-top: 5px; border-radius: 6px; border: 1px solid #ccc; }
+  button { margin-top: 20px; padding: 12px 20px; background: #339af0; color: #fff; border: none; border-radius: 6px; cursor: pointer; font-size: 1em; }
+  button:hover { background: #1c7ed6; }
+  .error { color: red; margin-top: 5px; }
+  .success { color: green; margin-top: 10px; }
+  .checkbox-group { margin-top: 10px; }
+</style>
+<script src="https://www.google.com/recaptcha/api.js" async defer></script>
+</head>
+<body>
+
+<header>
+  <img src="images/mascot-logo.png" alt="Mascot Logo">
+  <h1>Mascot Request Integration</h1>
+</header>
+
+<form id="integrationForm">
+  <label for="formatType">Format Type</label>
+  <select id="formatType" name="formatType" required>
+    <option value="">-- Select Format --</option>
+  </select>
+
+  <label>Message Types</label>
+  <div id="messageTypes" class="checkbox-group"></div>
+
+  <label for="name">Your Name</label>
+  <input type="text" id="name" name="name" required>
+
+  <label for="company">Company</label>
+  <input type="text" id="company" name="company" required>
+
+  <label for="email">Email</label>
+  <input type="email" id="email" name="email" required>
+
+  <label for="notes">Notes (optional)</label>
+  <textarea id="notes" name="notes" rows="4"></textarea>
+
+  <div class="g-recaptcha" data-sitekey="YOUR_RECAPTCHA_SITE_KEY"></div>
+
+  <button type="submit">Submit Request</button>
+  <div id="responseMessage"></div>
+</form>
+
+<script>
+let catalogData = {};
+
+// Load catalog.json dynamically
+fetch('catalog.json')
+  .then(res => res.json())
+  .then(data => {
+    catalogData = data;
+    const formatSelect = document.getElementById('formatType');
+    data.categories.forEach(cat => {
+      const option = document.createElement('option');
+      option.value = cat.name;
+      option.textContent = cat.name;
+      formatSelect.appendChild(option);
+    });
+  });
+
+// Update message types dynamically when a format type is selected
+document.getElementById('formatType').addEventListener('change', function() {
+  const selected = this.value;
+  const msgContainer = document.getElementById('messageTypes');
+  msgContainer.innerHTML = '';
+  if (!selected) return;
+  const category = catalogData.categories.find(c => c.name === selected);
+  category.formats.forEach(fmt => {
+    const div = document.createElement('div');
+    div.innerHTML = `
+      <input type="checkbox" id="msg-${fmt.name}" name="messageTypes" value="${fmt.name}">
+      <label for="msg-${fmt.name}">${fmt.name}</label>
+    `;
+    msgContainer.appendChild(div);
+  });
+});
+
+// Handle form submission
+document.getElementById('integrationForm').addEventListener('submit', function(e) {
+  e.preventDefault();
+
+  const formatType = document.getElementById('formatType').value;
+  const messages = Array.from(document.querySelectorAll('input[name="messageTypes"]:checked')).map(c => c.value);
+  const name = document.getElementById('name').value;
+  const company = document.getElementById('company').value;
+  const email = document.getElementById('email').value;
+  const notes = document.getElementById('notes').value;
+  const recaptcha = grecaptcha.getResponse();
+
+  const responseMessage = document.getElementById('responseMessage');
+  responseMessage.className = '';
+  responseMessage.textContent = '';
+
+  if (!formatType || messages.length === 0) {
+    responseMessage.textContent = 'Please select a format type and at least one message type.';
+    responseMessage.className = 'error';
+    return;
+  }
+
+  if (!recaptcha) {
+    responseMessage.textContent = 'Please complete the reCAPTCHA.';
+    responseMessage.className = 'error';
+    return;
+  }
+
+  // Send data to serverless Jira function
+  fetch('/api/jira-create', {
+    method: 'POST',
+    headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
+  })
+  .then(res => res.json())
+  .then(resp => {
+    if (resp.success) {
+      responseMessage.textContent = 'Request submitted successfully!';
+      responseMessage.className = 'success';
+      this.reset();
+      document.getElementById('messageTypes').innerHTML = '';
+      grecaptcha.reset();
+    } else {
+      responseMessage.textContent = resp.error || 'Submission failed.';
+      responseMessage.className = 'error';
+    }
+  })
+  .catch(() => {
+    responseMessage.textContent = 'Submission failed.';
+    responseMessage.className = 'error';
+  });
+});
+</script>
+
+</body>
+</html>
