@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-let rateLimitStore = {}; // Simple in-memory rate limiter (resets on cold start)
+let rateLimitStore = {}; // In-memory rate limiter (resets on cold start)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -11,6 +11,7 @@ export default async function handler(req, res) {
 
   // --- Validate required fields ---
   if (!formatType || !messages || messages.length === 0 || !name || !company || !email || !recaptcha) {
+    console.error('Validation error: Missing required fields');
     return res.status(400).json({ success: false, error: 'Missing required fields' });
   }
 
@@ -18,47 +19,46 @@ export default async function handler(req, res) {
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   const now = Date.now();
   if (rateLimitStore[ip] && now - rateLimitStore[ip] < 10 * 60 * 1000) {
+    console.warn('Rate limit triggered for IP: [REDACTED]');
     return res.status(429).json({ success: false, error: 'Only one request per 10 minutes is allowed.' });
   }
 
   // --- Verify reCAPTCHA ---
-  const recaptchaVerify = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptcha}`
-  }).then(r => r.json());
+  try {
+    const recaptchaVerify = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptcha}`
+    }).then(r => r.json());
 
-  if (!recaptchaVerify.success) {
-    return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
+    if (!recaptchaVerify.success) {
+      console.error('Invalid reCAPTCHA response:', JSON.stringify(recaptchaVerify));
+      return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
+    }
+  } catch (error) {
+    console.error('Error verifying reCAPTCHA:', error.message);
+    return res.status(500).json({ success: false, error: 'Failed to verify reCAPTCHA.' });
   }
 
   // --- Build Jira ticket payload ---
   const jiraPayload = {
     fields: {
       project: { key: process.env.JIRA_PROJECT_KEY },
-
-      // Summary (use Notes)
       summary: notes || 'Integration request submitted via Contact Form',
-
-      // EDI Format (single select)
-      customfield_10231: formatType,
-
-      // Format types requested (multi-select)
-      customfield_10298: messages.map(m => ({ value: m })),
-
-      // Status field (set default)
-      customfield_10228: { value: 'Not Started' },
-
-      // Customer Name
-      customfield_10220: company,
-
-      // Contact Person (combine name + email)
-      customfield_10218: `${name} (${email})`,
-
-      // Issue type
+      customfield_10231: formatType, // EDI Format
+      customfield_10298: messages.map(m => ({ value: m })), // Format types requested
+      customfield_10228: { value: 'Not Started' }, // Status
+      customfield_10220: company, // Customer Name
+      customfield_10218: `${name} (${email})`, // Contact Person
       issuetype: { name: 'Task' }
     }
   };
+
+  // Log payload but redact sensitive fields
+  const safePayload = JSON.parse(JSON.stringify(jiraPayload));
+  if (safePayload.fields?.customfield_10218) safePayload.fields.customfield_10218 = '[REDACTED_EMAIL]';
+  console.log('--- Jira Payload (Sanitized) ---');
+  console.log(JSON.stringify(safePayload, null, 2));
 
   try {
     // --- Send to Jira API ---
@@ -72,9 +72,13 @@ export default async function handler(req, res) {
       body: JSON.stringify(jiraPayload)
     });
 
+    const responseText = await jiraResponse.text();
+
+    console.log('--- Jira API Response ---');
+    console.log('Status:', jiraResponse.status);
+    console.log('Body:', responseText);
+
     if (!jiraResponse.ok) {
-      const errorText = await jiraResponse.text();
-      console.error('Jira API error:', errorText);
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
 
@@ -83,7 +87,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ success: true, message: 'Jira ticket created successfully.' });
   } catch (error) {
-    console.error('Error creating Jira ticket:', error);
+    console.error('Error creating Jira ticket:', error.message);
     return res.status(500).json({ success: false, error: 'Internal server error.' });
   }
 }
