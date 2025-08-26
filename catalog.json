@@ -9,7 +9,7 @@
     {
       "name": "EDIFACT",
       "formats": [
-        { "name": "Order", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS", "connections": ["SFTP"] },
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS", "connections": ["SFTP"] },
         { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDRSP", "connections": ["SFTP", "FTP", "EMAIL"] },
         { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/INVOIC", "connections": ["SFTP", "FTP", "EMAIL"] },
         { "name": "Dispatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/DESADV", "connections": ["SFTP", "FTP", "EMAIL"] }
