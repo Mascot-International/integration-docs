@@ -1,3 +1,5 @@
+import fetch from 'node-fetch';
+
 let rateLimitStore = {}; // Simple in-memory store (resets on serverless cold start)
 
 export default async function handler(req, res) {
@@ -34,7 +36,7 @@ export default async function handler(req, res) {
     // --- Build Jira ticket payload ---
     const jiraPayload = {
       fields: {
-        project: { key: process.env.JIRA_PROJECT_KEY }, // Example: 'EDI'
+        project: { key: process.env.JIRA_PROJECT_KEY },
         summary: `New Integration Request - ${company}`,
         description: {
           type: "doc",
@@ -57,11 +59,13 @@ export default async function handler(req, res) {
       }
     };
 
-    // --- Send to Jira API ---
+    // --- Send to Jira API using Basic Auth ---
+    const authString = Buffer.from(`${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`).toString('base64');
+
     const jiraResponse = await fetch(`${process.env.JIRA_BASE_URL}/rest/api/3/issue`, {
       method: 'POST',
       headers: {
-        'Authorization': `Bearer ${process.env.JIRA_API_TOKEN}`,
+        'Authorization': `Basic ${authString}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
