@@ -1,6 +1,4 @@
-import fetch from 'node-fetch';
-
-let rateLimitStore = {}; // Simple in-memory store (resets on serverless cold start)
+let rateLimitStore = {}; // In-memory store (resets on cold start)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -23,20 +21,21 @@ export default async function handler(req, res) {
 
   try {
     // --- Verify reCAPTCHA with Google ---
-    const recaptchaVerify = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+    const recaptchaResponse = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptcha}`
-    }).then(r => r.json());
+    });
+    const recaptchaResult = await recaptchaResponse.json();
 
-    if (!recaptchaVerify.success) {
+    if (!recaptchaResult.success) {
       return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
     }
 
     // --- Build Jira ticket payload ---
     const jiraPayload = {
       fields: {
-        project: { key: process.env.JIRA_PROJECT_KEY },
+        project: { key: process.env.JIRA_PROJECT_KEY }, // e.g., 'EDI'
         summary: `New Integration Request - ${company}`,
         description: {
           type: "doc",
@@ -59,13 +58,14 @@ export default async function handler(req, res) {
       }
     };
 
-    // --- Send to Jira API using Basic Auth ---
-    const authString = Buffer.from(`${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`).toString('base64');
+    // --- Basic Auth header ---
+    const auth = Buffer.from(`${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`).toString('base64');
 
+    // --- Send to Jira API ---
     const jiraResponse = await fetch(`${process.env.JIRA_BASE_URL}/rest/api/3/issue`, {
       method: 'POST',
       headers: {
-        'Authorization': `Basic ${authString}`,
+        'Authorization': `Basic ${auth}`,
         'Accept': 'application/json',
         'Content-Type': 'application/json'
       },
@@ -78,7 +78,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
 
-    // Store timestamp for rate limiting
+    // --- Store timestamp for rate limiting ---
     rateLimitStore[ip] = now;
 
     return res.status(200).json({ success: true, message: 'Jira ticket created successfully.' });
