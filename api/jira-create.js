@@ -17,8 +17,8 @@ export default async function handler(req, res) {
   // --- Rate limiting (1 request per IP per hour) ---
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   const now = Date.now();
-  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 60 * 60 * 1000) {
-    return res.status(429).json({ success: false, error: 'Only one request per hour is allowed.' });
+  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 60 * 10 * 1000) {
+    return res.status(429).json({ success: false, error: 'Only one request per 10 minutes is allowed.' });
   }
 
   // --- Verify reCAPTCHA ---
