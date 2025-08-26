@@ -1,6 +1,4 @@
-import fetch from 'node-fetch';
-
-let rateLimitStore = {}; // simple in-memory store for rate limiting
+let rateLimitStore = {}; // Simple in-memory store (resets on serverless cold start)
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,54 +12,52 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
   }
 
-  // --- Rate limiting (1 request per IP per hour) ---
+  // --- Rate limiting (10 minutes per IP) ---
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   const now = Date.now();
-  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 60 * 10 * 1000) {
+  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 10 * 60 * 1000) {
     return res.status(429).json({ success: false, error: 'Only one request per 10 minutes is allowed.' });
   }
 
-  // --- Verify reCAPTCHA ---
-  const recaptchaVerify = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
-    body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptcha}`
-  }).then(r => r.json());
-
-  if (!recaptchaVerify.success) {
-    return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
-  }
-
-  // --- Build Jira ADF description ---
-  const descriptionADF = {
-    type: "doc",
-    version: 1,
-    content: [
-      { type: "paragraph", content: [{ text: `Name: ${name}`, type: "text" }] },
-      { type: "paragraph", content: [{ text: `Company: ${company}`, type: "text" }] },
-      { type: "paragraph", content: [{ text: `Email: ${email}`, type: "text" }] },
-      { type: "paragraph", content: [{ text: `Format Type: ${formatType}`, type: "text" }] },
-      { type: "paragraph", content: [{ text: `Message Types: ${messages.join(', ')}`, type: "text" }] },
-      { type: "paragraph", content: [{ text: `Notes: ${notes || 'None'}`, type: "text" }] }
-    ]
-  };
-
-  // --- Build Jira payload ---
-  const jiraPayload = {
-    fields: {
-      project: { key: process.env.JIRA_PROJECT_KEY },      // Example: "EDI"
-      summary: `Integration Request - ${company}`,         // Summary field
-      description: descriptionADF,                         // ADF description
-      issuetype: { name: "LOB_MAP" },                     // Use your Jira issue type
-      customfield_10228: { value: "Not Started" },        // Status field
-      customfield_10220: company,                         // Customer Name
-      customfield_10218: `${name} - ${email}`,            // Contact Person
-      customfield_10231: { value: formatType },           // EDI Format
-      customfield_10298: messages.map(m => ({ value: m }))// Format types requested
-    }
-  };
-
   try {
+    // --- Verify reCAPTCHA with Google ---
+    const recaptchaVerify = await fetch(`https://www.google.com/recaptcha/api/siteverify`, {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${recaptcha}`
+    }).then(r => r.json());
+
+    if (!recaptchaVerify.success) {
+      return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
+    }
+
+    // --- Build Jira ticket payload ---
+    const jiraPayload = {
+      fields: {
+        project: { key: process.env.JIRA_PROJECT_KEY }, // Example: 'EDI'
+        summary: `New Integration Request - ${company}`,
+        description: {
+          type: "doc",
+          version: 1,
+          content: [
+            {
+              type: "paragraph",
+              content: [
+                { text: notes || 'No additional notes provided', type: "text" }
+              ]
+            }
+          ]
+        },
+        issuetype: { name: process.env.JIRA_ISSUE_TYPE || "LOB_MAP" },
+        customfield_10220: company, // Customer Name
+        customfield_10218: `${name} - ${email}`, // Contact Person
+        customfield_10228: { value: "Not Started" }, // Status
+        customfield_10231: { value: formatType }, // EDI Format
+        customfield_10298: messages.map(m => ({ value: m })) // Format types requested
+      }
+    };
+
+    // --- Send to Jira API ---
     const jiraResponse = await fetch(`${process.env.JIRA_BASE_URL}/rest/api/3/issue`, {
       method: 'POST',
       headers: {
@@ -78,10 +74,11 @@ export default async function handler(req, res) {
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
 
-    // --- Update rate limit store ---
+    // Store timestamp for rate limiting
     rateLimitStore[ip] = now;
 
     return res.status(200).json({ success: true, message: 'Jira ticket created successfully.' });
+
   } catch (error) {
     console.error('Error creating Jira ticket:', error);
     return res.status(500).json({ success: false, error: 'Internal server error.' });
