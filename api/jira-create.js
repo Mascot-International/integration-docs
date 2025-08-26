@@ -1,6 +1,6 @@
 import fetch from 'node-fetch';
 
-let rateLimitStore = {}; // In-memory rate limiter (resets on cold start)
+let rateLimitStore = {}; // simple in-memory store for rate limiting
 
 export default async function handler(req, res) {
   if (req.method !== 'POST') {
@@ -14,10 +14,10 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
   }
 
-  // --- Rate limiting (1 request per hour per IP) ---
+  // --- Rate limiting (1 request per IP per hour) ---
   const ip = req.headers['x-forwarded-for'] || req.socket.remoteAddress;
   const now = Date.now();
-  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 60 * 60 * 1000) { // 1 hour
+  if (rateLimitStore[ip] && now - rateLimitStore[ip] < 60 * 60 * 1000) {
     return res.status(429).json({ success: false, error: 'Only one request per hour is allowed.' });
   }
 
@@ -32,23 +32,36 @@ export default async function handler(req, res) {
     return res.status(400).json({ success: false, error: 'Invalid reCAPTCHA. Please try again.' });
   }
 
-  // --- Build Jira ticket payload ---
+  // --- Build Jira ADF description ---
+  const descriptionADF = {
+    type: "doc",
+    version: 1,
+    content: [
+      { type: "paragraph", content: [{ text: `Name: ${name}`, type: "text" }] },
+      { type: "paragraph", content: [{ text: `Company: ${company}`, type: "text" }] },
+      { type: "paragraph", content: [{ text: `Email: ${email}`, type: "text" }] },
+      { type: "paragraph", content: [{ text: `Format Type: ${formatType}`, type: "text" }] },
+      { type: "paragraph", content: [{ text: `Message Types: ${messages.join(', ')}`, type: "text" }] },
+      { type: "paragraph", content: [{ text: `Notes: ${notes || 'None'}`, type: "text" }] }
+    ]
+  };
+
+  // --- Build Jira payload ---
   const jiraPayload = {
     fields: {
-      project: { key: process.env.JIRA_PROJECT_KEY }, // e.g., 'INT'
-      summary: notes || `New Integration Request - ${company}`, // Summary
-      description: notes || 'No additional notes provided',
-      issuetype: { name: "LOB_MAP" }, // Correct issue type
-      customfield_10220: company, // Customer Name
-      customfield_10218: `${name} <${email}>`, // Contact Person
-      customfield_10231: formatType, // EDI Format
-      customfield_10298: messages, // Format types requested
-      customfield_10228: "Not Started" // Status
+      project: { key: process.env.JIRA_PROJECT_KEY },      // Example: "EDI"
+      summary: `Integration Request - ${company}`,         // Summary field
+      description: descriptionADF,                         // ADF description
+      issuetype: { name: "LOB_MAP" },                     // Use your Jira issue type
+      customfield_10228: { value: "Not Started" },        // Status field
+      customfield_10220: company,                         // Customer Name
+      customfield_10218: `${name} - ${email}`,            // Contact Person
+      customfield_10231: { value: formatType },           // EDI Format
+      customfield_10298: messages.map(m => ({ value: m }))// Format types requested
     }
   };
 
   try {
-    // --- Send to Jira API ---
     const jiraResponse = await fetch(`${process.env.JIRA_BASE_URL}/rest/api/3/issue`, {
       method: 'POST',
       headers: {
@@ -65,7 +78,7 @@ export default async function handler(req, res) {
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
 
-    // --- Store timestamp for rate limiting ---
+    // --- Update rate limit store ---
     rateLimitStore[ip] = now;
 
     return res.status(200).json({ success: true, message: 'Jira ticket created successfully.' });
