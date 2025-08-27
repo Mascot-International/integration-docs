@@ -196,7 +196,7 @@
                     <s:element name="PhonePrefix">
                       <s:simpleType>
                         <s:restriction base="s:string">
-                          <s:maxLength value="3"/>
+                          <s:maxLength value="4"/>
                         </s:restriction>
                       </s:simpleType>
                     </s:element>
