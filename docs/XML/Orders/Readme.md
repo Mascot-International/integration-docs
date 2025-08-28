@@ -31,11 +31,12 @@ It includes **header**, **order line**, and **dropshipment** fields, as well as 
 
 ## Data Types
 
-| DataType | Description | Format | Example 1 | Example 2 |
-|-----------|-------------|--------|-----------|-----------|
-|**Alphanumeric** | XxYyZz | `Ref 321_2` | `John, Fred` |
-|**Numeric** | 999 | `453` | `123456789` |
-|**Date** | YYYY-MM-DD | `2015-08-26` | `2011-12-04` |
+| DataType | Description | Format | Example 1 |
+|-----------|-------------|--------|-----------|
+|**Alpha** | Letters | `AaBbCcDd` | `John Johnson` |
+|**Alphanumeric** | Letters+Numbers | `Ref 321_2` | `John 1993` |
+|**Numeric** | Numbers | `453` | `123456789` |
+|**Date** | Date | `YYYY-MM-DD` | `2024-12-04` |
 
 ---
 
@@ -47,7 +48,7 @@ It includes **header**, **order line**, and **dropshipment** fields, as well as 
 | `<BuyerID>` | Max Length 13 (numeric) | **M** | Your ID number (account or GLN). Must be confirmed by Mascot. | `5790001294939` |
 | `<PreferredDeliveryDate>` | `YYYY-MM-DD` (date) | **M** | Preferred delivery date. | `2025-01-23` |
 | `<OrderReference>` | Max Length 16 (alphanumeric) | **M** | Your reference for this order. | `ORDERREF5436` |
-| `<IssueEmail>` | Email | **R** | Email for error notifications if mandatory fields are missing. | `test@mascot.dk` |
+| `<IssueEmail>` | Email | **R** | Email for error notifications if mandatory fields are missing. | `user@company.com` |
 | `<NonStandardDelivery>` | Container | **O** | Alternative delivery option. See [Delivery Types](#delivery-types-explained). |  |
 | `<DeliveryByNumber>` | Max Length 13 (numeric) | **O** | Commission or GLN number for alternative addresses. | `1234567891011` |
 | `<DeliveryByAddress>` | Container | **O** | Alternative delivery address fields (if not using `<DeliveryByNumber>`). |  |
