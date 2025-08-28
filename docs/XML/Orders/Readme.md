@@ -129,7 +129,7 @@ For **B2C orders (Ordertype = ZE)**, additional fields are required:
 ## XML Schema Definition (XSD)
 
 The XML structure is defined in the official XSD schema:  
-[**XML_ORDER_MASCOT_V1-2.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/XML_ORDER_MASCOT_V1-2.xsd)
+[**XML_Mascot_Order.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML_Mascot_Order.xsd)
 
 ---
 
