@@ -5,7 +5,7 @@
 	<BuyerID>5790001294939</BuyerID>
  	<PreferredDeliveryDate>2025-01-23</PreferredDeliveryDate>
 	<OrderReference>Test_Ref_4</OrderReference>
-	<IssueEmail>testuser@mascot.dk</IssueEmail>
+	<IssueEmail>notification-user@companytest.com</IssueEmail>
 	<NonStandardDelivery>
 		<DeliveryByNumber></DeliveryByNumber>
 		<DeliveryByAddress>
