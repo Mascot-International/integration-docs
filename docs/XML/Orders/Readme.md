@@ -65,7 +65,7 @@ It includes **header**, **order line**, and **dropshipment** fields, as well as 
 | Fieldname | Format | Rule | Description | Example |
 |------------|--------|------|-------------|---------|
 | `<OrderLine>` | Container | **M** | Container for each orderline | |
-| `<Line>` | Max Length 3 | **O** | Container for each line number | |
+| `<Line>` | Max Length 3 | **O** | Container for each line number | "1"|
 | `<BuyersLineReference>` | Max Length 35 (alphanumeric) | **O** | Customer's reference per line. | `Customer_Line_Ref-1` |
 | `<SuppliersEANCode>` | Max Length 13 (numeric) | **M** | Supplier's unique EAN key for the product. | `1234567891012` |
 | `<SuppliersMaterialNumber>` | Max Length 35 (alphanumeric) | **O** | Mascot material number. | `2314-231-231 XL` |
