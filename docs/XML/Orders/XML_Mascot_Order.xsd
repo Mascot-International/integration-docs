@@ -88,9 +88,16 @@
             </s:sequence>
           </s:complexType>
         </s:element>
-        <s:element name="OrderLine" minOccurs="1" maxOccurs="2000">
+        <s:element name="OrderLine" minOccurs="1" maxOccurs="999">
           <s:complexType>
             <s:sequence>
+                <s:element name="Line">
+                <s:simpleType>
+                  <s:restriction base="s:decimal">
+                    <s:maxLength value="3"/>
+                  </s:restriction>
+                </s:simpleType>
+              </s:element>
               <s:element name="BuyersLineReference">
                 <s:simpleType>
                   <s:restriction base="s:string">
