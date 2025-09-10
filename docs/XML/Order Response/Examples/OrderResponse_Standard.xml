@@ -96,6 +96,7 @@
     <NumberOfLines>1</NumberOfLines>
     <QuantityTotal>5</QuantityTotal>
     <LineTotal>100.00</LineTotal>
+    <TaxRate>20.00</TaxRate>
     <TaxTotal>20.00</TaxTotal>
     <NetPaymentTotal>80.00</NetPaymentTotal>
   </OrderResponseTotal>
