@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderResponse xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+
+  <Schema>
+    <Version>1</Version>
+  </Schema>
+
+  <OrderType>Standard</OrderType>
+  <OrderResponseNumber>10001</OrderResponseNumber>
+  <BuyerOrderReference>ORDERREF123</BuyerOrderReference>
+  <OrderDate>2025-01-05</OrderDate>
+  <OrderResponseDate>2025-01-06</OrderResponseDate>
+  <RequestedDeliveryDate>2025-01-20</RequestedDeliveryDate>
+  <OrderCurrency>EUR</OrderCurrency>
+  <DeliveryTerms>DDP</DeliveryTerms>
+  <DeliveryText>Delivered Duty Paid</DeliveryText>
+
+  <BuyerParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+    <Communication>
+      <EmailAddress>Buyer@email.com</EmailAddress>
+      <PhoneNumber>+4912345678</PhoneNumber>
+    </Communication>
+  </BuyerParty>
+
+  <SupplierParty>
+    <ID>Mascot_Number</ID>
+    <Name1>Mascot International A/S</Name1>
+    <Address>Silkeborgvej 12</Address>
+    <City>Silkeborg</City>
+    <PostalCode>7400</PostalCode>
+    <CountryCode>DK</CountryCode>
+    <Communication>
+      <EmailAddress>mascot@email.com</EmailAddress>
+      <PhoneNumber>+4512345678</PhoneNumber>
+    </Communication>
+  </SupplierParty>
+
+  <PayerParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+  </PayerParty>
+
+  <InvoiceParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+  </InvoiceParty>
+
+  <DeliveryToParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+    <Communication>
+      <EmailAddress>Company@address.com</EmailAddress>
+      <PhoneNumber>+4912345678</PhoneNumber>
+    </Communication>
+  </DeliveryToParty>
+
+  <OrderResponseLines>
+    <OrderLine>
+      <Line>1</Line>
+      <OriginalLine>1</OriginalLine>
+      <BuyerLineReference>Customer_Line_Ref-1</BuyerLineReference>
+      <SupplierEANCode>1234567891012</SupplierEANCode>
+      <SupplierMaterialNumber>9999-231-231 XL</SupplierMaterialNumber>
+      <ProductDescription>Mascot T-Shirt</ProductDescription>
+      <Quantity>5</Quantity>
+      <UnitGrossPrice>20.00</UnitGrossPrice>
+      <LineGrossPrice>100.00</LineGrossPrice>
+      <UnitNetPrice>16.00</UnitNetPrice>
+      <LineNetPrice>80.00</LineNetPrice>
+      <Delivery>
+        <ConfirmedAmount>5</ConfirmedAmount>
+        <EstimatedDeliveryDate>2025-01-20</EstimatedDeliveryDate>
+      </Delivery>
+    </OrderLine>
+  </OrderResponseLines>
+
+  <OrderResponseTotal>
+    <NumberOfLines>1</NumberOfLines>
+    <QuantityTotal>5</QuantityTotal>
+    <LineTotal>100.00</LineTotal>
+    <TaxTotal>20.00</TaxTotal>
+    <NetPaymentTotal>80.00</NetPaymentTotal>
+  </OrderResponseTotal>
+
+</OrderResponse>
