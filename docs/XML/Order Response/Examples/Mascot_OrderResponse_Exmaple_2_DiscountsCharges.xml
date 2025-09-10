@@ -1,0 +1,129 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<OrderResponse>
+  <Schema>
+    <Version>1</Version>
+  </Schema>
+
+  <OrderType>Standard</OrderType>
+  <OrderResponseNumber>10002</OrderResponseNumber>
+  <BuyerOrderReference>ORDERREF456</BuyerOrderReference>
+  <OrderDate>2025-01-07</OrderDate>
+  <OrderResponseDate>2025-01-08</OrderResponseDate>
+  <RequestedDeliveryDate>2025-01-25</RequestedDeliveryDate>
+  <OrderCurrency>EUR</OrderCurrency>
+  <DeliveryTerms>DDP</DeliveryTerms>
+  <DeliveryText>Delivered Duty Paid</DeliveryText>
+
+
+  <BuyerParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+    <Communication>
+      <EmailAddress>Buyer@email.com</EmailAddress>
+      <PhoneNumber>+4912345678</PhoneNumber>
+    </Communication>
+  </BuyerParty>
+
+  <SupplierParty>
+    <ID>Mascot_Number</ID>
+    <Name1>Mascot International A/S</Name1>
+    <Address>Silkeborgvej 12</Address>
+    <City>Silkeborg</City>
+    <PostalCode>7400</PostalCode>
+    <CountryCode>DK</CountryCode>
+    <Communication>
+      <EmailAddress>mascot@email.com</EmailAddress>
+      <PhoneNumber>+4512345678</PhoneNumber>
+    </Communication>
+  </SupplierParty>
+
+  <PayerParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+  </PayerParty>
+
+  <InvoiceParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+  </InvoiceParty>
+
+  <DeliveryToParty>
+    <ID>Account_Number</ID>
+    <Name1>Customer A</Name1>
+    <Address>Main Street 1</Address>
+    <City>Berlin</City>
+    <PostalCode>10115</PostalCode>
+    <CountryCode>DE</CountryCode>
+    <Communication>
+      <EmailAddress>Company@address.com</EmailAddress>
+      <PhoneNumber>+4912345678</PhoneNumber>
+    </Communication>
+  </DeliveryToParty>
+
+  <OrderResponseLines>
+    <OrderLine>
+      <Line>1</Line>
+      <OriginalLine>1</OriginalLine>
+      <BuyerLineReference>Customer_Line_Ref-1</BuyerLineReference>
+      <SupplierEANCode>9123456789113</SupplierEANCode>
+      <SupplierMaterialNumber>9991-123-123 L</SupplierMaterialNumber>
+      <ProductDescription>Mascot Jacket 123</ProductDescription>
+      <Quantity>2</Quantity>
+      <UnitGrossPrice>150.00</UnitGrossPrice>
+      <LineGrossPrice>300.00</LineGrossPrice>
+      <LineDiscounts>
+        <Discount>
+          <Text>Example Discount Text</Text>
+          <Value>30.00</Value>
+          <Percentage>10.0</Percentage>
+        </Discount>
+      </LineDiscounts>
+      <LineCharges>
+        <Charge>
+          <Text>Charge Fee Text</Text>
+          <Value>5.00</Value>
+        </Charge>
+      </LineCharges>
+      <UnitNetPrice>137.50</UnitNetPrice>
+      <LineNetPrice>275.00</LineNetPrice>
+      <Delivery>
+        <ConfirmedAmount>2</ConfirmedAmount>
+        <EstimatedDeliveryDate>2025-01-25</EstimatedDeliveryDate>
+      </Delivery>
+    </OrderLine>
+  </OrderResponseLines>
+
+  <OrderResponseTotal>
+    <NumberOfLines>1</NumberOfLines>
+    <QuantityTotal>2</QuantityTotal>
+    <LineTotal>275.00</LineTotal>
+    <HeaderDiscounts>
+      <Discount>
+        <Text>Header Example Discount</Text>
+        <Value>10.00</Value>
+      </Discount>
+    </HeaderDiscounts>
+    <HeaderCharges>
+      <Charge>
+        <Text>Example Freight</Text>
+        <Value>15.00</Value>
+      </Charge>
+    </HeaderCharges>
+    <TaxRate>54.00</TaxRate>
+    <TaxTotal>54.00</TaxTotal>
+    <NetPaymentTotal>280.00</NetPaymentTotal>
+  </OrderResponseTotal>
+
+</OrderResponse>
