@@ -147,6 +147,7 @@
       <s:element name="LineTotal" type="s:decimal"/>
       <s:element name="HeaderDiscounts" type="DiscountsType" minOccurs="0"/>
       <s:element name="HeaderCharges" type="ChargesType" minOccurs="0"/>
+      <s:element name="TaxRate" type="s:decimal"/>
       <s:element name="TaxTotal" type="s:decimal"/>
       <s:element name="NetPaymentTotal" type="s:decimal"/>
     </s:sequence>
