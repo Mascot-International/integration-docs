@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<s:schema xmlns:s="http://www.w3.org/2001/XMLSchema" elementFormDefault="qualified">
+
+  <!-- Root -->
+  <s:element name="OrderResponse">
+    <s:complexType>
+      <s:sequence>
+
+        <!-- Schema -->
+        <s:element name="Schema">
+          <s:complexType>
+            <s:sequence>
+              <s:element name="Version" type="s:integer"/>
+            </s:sequence>
+          </s:complexType>
+        </s:element>
+
+        <!-- Header -->
+        <s:element name="OrderType" type="OrderTypeEnum"/>
+        <s:element name="OrderResponseNumber" type="s:integer"/>
+        <s:element name="BuyerOrderReference" type="s:string" minOccurs="0"/>
+        <s:element name="OrderDate" type="s:date"/>
+        <s:element name="OrderResponseDate" type="s:date"/>
+        <s:element name="RequestedDeliveryDate" type="s:date" minOccurs="0"/>
+        <s:element name="OrderCurrency" type="s:string" minOccurs="1" maxOccurs="1"/>
+        <s:element name="DeliveryTerms" type="s:string" minOccurs="0"/>
+        <s:element name="DeliveryText" type="s:string" minOccurs="0"/>
+
+        <!-- Parties -->
+        <s:element name="BuyerParty" type="PartyType"/>
+        <s:element name="SupplierParty" type="PartyType"/>
+        <s:element name="PayerParty" type="PartyType"/>
+        <s:element name="InvoiceParty" type="PartyType"/>
+        <s:element name="DeliveryToParty" type="PartyType"/>
+
+        <!-- Order lines -->
+        <s:element name="OrderResponseLines">
+          <s:complexType>
+            <s:sequence>
+              <s:element name="OrderLine" type="OrderLineType" maxOccurs="2000"/>
+            </s:sequence>
+          </s:complexType>
+        </s:element>
+
+        <!-- Totals -->
+        <s:element name="OrderResponseTotal" type="OrderResponseTotalType"/>
+
+      </s:sequence>
+    </s:complexType>
+  </s:element>
+
+  <!-- ========== Reusable Types ========== -->
+
+  <!-- Order Type -->
+  <s:simpleType name="OrderTypeEnum">
+    <s:restriction base="s:string">
+      <s:enumeration value="Standard"/>
+      <s:enumeration value="Return"/>
+    </s:restriction>
+  </s:simpleType>
+
+  <!-- Party -->
+  <s:complexType name="PartyType">
+    <s:sequence>
+      <s:element name="ID" type="s:string" minOccurs="0"/>
+      <s:element name="Name1" type="s:string"/>
+      <s:element name="Name2" type="s:string" minOccurs="0"/>
+      <s:element name="Address" type="s:string"/>
+      <s:element name="City" type="s:string"/>
+      <s:element name="PostalCode" type="s:string"/>
+      <s:element name="CountryCode" type="s:string"/>
+      <s:element name="Communication" type="CommunicationType" minOccurs="0"/>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Communication -->
+  <s:complexType name="CommunicationType">
+    <s:sequence>
+      <s:element name="EmailAddress" type="s:string" minOccurs="0"/>
+      <s:element name="PhoneNumber" type="s:string" minOccurs="0"/>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Discounts -->
+  <s:complexType name="DiscountsType">
+    <s:sequence>
+      <s:element name="Discount" maxOccurs="unbounded" minOccurs="0">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="Text" type="s:string" minOccurs="0"/>
+            <s:element name="Value" type="s:decimal"/>
+            <s:element name="Percentage" type="s:decimal" minOccurs="0"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Charges -->
+  <s:complexType name="ChargesType">
+    <s:sequence>
+      <s:element name="Charge" maxOccurs="unbounded" minOccurs="0">
+        <s:complexType>
+          <s:sequence>
+            <s:element name="Text" type="s:string" minOccurs="0"/>
+            <s:element name="Value" type="s:decimal"/>
+            <s:element name="Percentage" type="s:decimal" minOccurs="0"/>
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Delivery -->
+  <s:complexType name="DeliveryType">
+    <s:sequence>
+      <s:element name="ConfirmedAmount" type="s:integer"/>
+      <s:element name="EstimatedDeliveryDate" type="s:date"/>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Order line -->
+  <s:complexType name="OrderLineType">
+    <s:sequence>
+      <s:element name="Line" type="s:integer" minOccurs="0"/>
+      <s:element name="OriginalLine" type="s:string" minOccurs="0"/>
+      <s:element name="BuyerLineReference" type="s:string"/>
+      <s:element name="SupplierEANCode" type="s:string"/>
+      <s:element name="SupplierMaterialNumber" type="s:string"/>
+      <s:element name="ProductDescription" type="s:string"/>
+      <s:element name="Quantity" type="s:integer"/>
+      <s:element name="UnitGrossPrice" type="s:decimal"/>
+      <s:element name="LineGrossPrice" type="s:decimal"/>
+      <s:element name="LineDiscounts" type="DiscountsType" minOccurs="0"/>
+      <s:element name="LineCharges" type="ChargesType" minOccurs="0"/>
+      <s:element name="UnitNetPrice" type="s:decimal"/>
+      <s:element name="LineNetPrice" type="s:decimal"/>
+      <s:element name="Delivery" type="DeliveryType" minOccurs="1" maxOccurs="unbounded"/>
+    </s:sequence>
+  </s:complexType>
+
+  <!-- Totals -->
+  <s:complexType name="OrderResponseTotalType">
+    <s:sequence>
+      <s:element name="NumberOfLines" type="s:integer"/>
+      <s:element name="QuantityTotal" type="s:decimal"/>
+      <s:element name="LineTotal" type="s:decimal"/>
+      <s:element name="HeaderDiscounts" type="DiscountsType" minOccurs="0"/>
+      <s:element name="HeaderCharges" type="ChargesType" minOccurs="0"/>
+      <s:element name="TaxTotal" type="s:decimal"/>
+      <s:element name="NetPaymentTotal" type="s:decimal"/>
+    </s:sequence>
+  </s:complexType>
+
+</s:schema>
