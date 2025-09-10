@@ -1,6 +1,6 @@
 # Mascot XML Order Structure – Documentation
 
-This document explains the structure, rules, and configuration for XML orders to Mascot.  
+This document explains the structure, rules, and configuration for **XML Orders** to Mascot.  
 It includes **header**, **order line**, and **dropshipment** fields, as well as details for **delivery types** and **SFTP transmission** setup.
 
 ---
