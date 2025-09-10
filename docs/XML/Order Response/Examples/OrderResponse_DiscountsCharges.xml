@@ -77,7 +77,7 @@
       <Line>1</Line>
       <OriginalLine>1</OriginalLine>
       <BuyerLineReference>Customer_Line_Ref-1</BuyerLineReference>
-      <SupplierEANCode>9123456789113</SupplierEANCode>
+      <SupplierEANCode>9999999999999</SupplierEANCode>
       <SupplierMaterialNumber>9991-123-123 L</SupplierMaterialNumber>
       <ProductDescription>Mascot Jacket 123</ProductDescription>
       <Quantity>2</Quantity>
