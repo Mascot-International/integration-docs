@@ -162,7 +162,7 @@ The `<OrderResponseTotal>` contains the **summary of the entire order response**
 ## XML Schema Definition (XSD)
 
 The XML structure is defined in the official XSD schema:  
-[**XML_Mascot_OrderResponse.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders%Response/XML_MASCOT_ORDER_RESPONSE_V1.xsd)
+[**XML_Mascot_OrderResponse.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders%20Response/XML_MASCOT_ORDER_RESPONSE_V1.xsd)
 
 ---
 
