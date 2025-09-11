@@ -74,7 +74,7 @@ Each party follows this structure:
 
 | Fieldname | Format | Rule | Example |
 |------------|--------|------|---------|
-| `<ID>` | Alphanumeric | **O** | `5790001082956` |
+| `<ID>` | Alphanumeric | **M** | `5790001082956` |
 | `<Name1>` | Text | **M** | `Mascot International A/S` |
 | `<Name2>` | Text | **O** | `Company name2` |
 | `<Address>` | Text | **M** | `Silkeborgvej 14` |
@@ -113,7 +113,7 @@ Each `<OrderLine>` represents a single product line.
 | `<LineNetPrice>` | Decimal | **M** | Net line total. | `44.50` |
 | `<Delivery>` | Container | **M** | Delivery splits for partial deliveries. | See [Delivery Structure](#delivery-structure) |
 
-### Discounts (`<LineDiscounts>`)
+### Discounts (`<LineDiscounts>` `<HeaderDiscounts>`)
 
 | Fieldname | Format | Rule | Example |
 |------------|--------|------|---------|
@@ -121,7 +121,7 @@ Each `<OrderLine>` represents a single product line.
 | `<Value>` | Decimal | **M** | `10.00` |
 | `<Percentage>` | Decimal | **O** | `10.00` |
 
-### Charges (`<LineCharges>`)
+### Charges (`<LineCharges>` `<HeaderCharges>`)
 
 | Fieldname | Format | Rule | Example |
 |------------|--------|------|---------|
