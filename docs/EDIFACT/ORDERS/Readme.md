@@ -68,7 +68,7 @@ UNH+364448150+ORDERS:D:XXX:UN'
 2. **Other Delivery Options**  
    - Company Address – Use **`NAD+DP+Delivery_ID/GLN_Number::91++Company+Street+City++Postcode+DE`** if you have a commission number or GLN number linked to a known address at Mascot.  
    - 3rd Party Address – Use **`NAD+DP+LEAVE EMPTY::91++Company+Street+City++Postcode+DE`** for a custom address (without GLN/commission number).  
-   - **Priority Rule** – If **both** are filled, `NAD+DP+GLN_NUMBER` takes priority.
+   - **Priority Rule** – If **both** are filled, `NAD+DP+Delivery_/GLN_NUMBER` takes priority.
 
 ---
 ## Example Messages
