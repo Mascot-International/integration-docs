@@ -75,7 +75,7 @@ UNH+364448150+ORDERS:D:XXX:UN'
 
 Example files are available here:
 
-- [Standard Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Standard.edi)
+- [Standard Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/ORDERS/Examples/Order_Mascot_EDIFACT_Standard.edi)
 - [Alternative Company Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Standard.txt)
 - [Alternative 3rd Party Address Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Standard.txt)
 
