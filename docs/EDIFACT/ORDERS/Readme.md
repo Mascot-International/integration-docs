@@ -52,7 +52,8 @@ UNH+364448150+ORDERS:D:XXX:UN'
 | **NAD+SU** | M | Supplier details (Mascot) | `NAD+SU+5790001294939::92++MASCOT+Silkeborgvej 14+Silkeborg++7500+DK'` |
 | **NAD+DP** | O | Delivery point if alternate | `NAD+DP+Delivery_ID/GLN_Number::91++Company+Street+City++Postcode+CountryCode'` **GLN/ID Needs to be known to Mascot**|
 | **LIN** | M | Product line, includes product EAN | `LIN+10++5711074225378:EN'` |
-| **PIA** | O | Seller/Buyer product references | `PIA+5+50569-961-1809 M:SA'` |
+| **PIA** | O | Seller product references | `PIA+5+50569-961-1809 M:SA'` |
+| **PIA** | O | Buyer product references | `PIA+5+Buyer Material No:BP'` |
 | **QTY** | M | Quantity | `QTY+21:5:PCE'` |
 | **UNS** | M | Section control (always `S`) | `UNS+S'` |
 | **UNT** | M | Trailer segment with line count | `UNT+22+3644'` |
@@ -76,8 +77,8 @@ UNH+364448150+ORDERS:D:XXX:UN'
 Example files are available here:
 
 - [Standard Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/ORDERS/Examples/Order_Mascot_EDIFACT_Standard.edi)
-- [Alternative Company Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Standard.txt)
-- [Alternative 3rd Party Address Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Standard.txt)
+- [Alternative Company Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Alternative_Company_Delivery.edi)
+- [Alternative 3rd Party Address Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Alternative_Delivery_Address:edi)
 
 ---
 
