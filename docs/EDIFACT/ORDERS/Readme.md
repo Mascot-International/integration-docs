@@ -78,7 +78,7 @@ Example files are available here:
 
 - [Standard Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/ORDERS/Examples/Order_Mascot_EDIFACT_Standard.edi)
 - [Alternative Company Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Alternative_Company_Delivery.edi)
-- [Alternative 3rd Party Address Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Alternative_Delivery_Address:edi)
+- [Alternative 3rd Party Address Delivery B2B Order](https://github.com/Mascot-International/integration-docs/blob/main/docs/EDIFACT/Orders/Examples/Order_Mascot_EDIFACT_Alternative_Delivery_Address.edi)
 
 ---
 
