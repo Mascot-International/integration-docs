@@ -1,0 +1,17 @@
+UNA:+.? '
+UNB+UNOC:3+Sender_GLN:14+Mascot_GLN:14+25030:0811+123456' #Mandatory Sender_GLN
+UNH+1+ORDERS:D:96A:UN' #96A or any other format
+BGM+220+ORDER_REF' #Mandatory
+DTM+2:20250306:102' #Optional Requested_Delivery_Date
+NAD+SU+Mascot_GLN::92++Mascot International GmbH+Neustadt 10+Flensburg++24939+DE' #Optional
+NAD+BY+Buyer_GLN::9++Buyer_Name+Buyer_Address+Buyer_City++Buyer_Postcode+CountryCode' #Buyer_GLN Mandatory
+COM+Buyer_Notification_Email:EM' #Optional
+NAD+DP+::++Delivery_Name+Delivery_Address+Delivery_City++Delivery_Postcode+CountryCode' #For Delivery to 3rd party address
+LIN+1++13_Digits_EAN:EN' #Mandatory
+PIA+5+Mascot_Material_Number:SA' #Optional
+PIA+5+Buyer_Material_Number:BP' #Optional
+IMD+F++:::Material_Description' #Optional
+QTY+21:1.00' #Mandatory
+UNS+S'
+UNT+23+1'
+UNZ+1+'
