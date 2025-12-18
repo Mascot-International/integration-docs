@@ -1,4 +1,4 @@
-# Mascot EDIFACT ORDER Format – Documentation
+# Mascot EDIFACT ORDER – Documentation
 
 This document provides an overview of the **EDIFACT message structure** for Mascot orders.  
 It includes details for **segment descriptions, data rules, and examples** for both standard B2B and Dropshipment (B2C) orders.
