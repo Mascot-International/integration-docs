@@ -33,7 +33,7 @@
         {
       "name": "Peppol",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/UBL/Peppol", "connections": ["SFTP", "EMAIL","Peppol Network"] }
       ]
     },
         {
