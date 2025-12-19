@@ -18,8 +18,8 @@
     {
       "name": "XML Mascot",
       "formats": [
-        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Orders", "connections": ["SFTP"] },
-        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Order%20Response", "connections": ["SFTP", "FTP", "EMAIL"] },
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/Orders", "connections": ["SFTP"] },
+        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Readme.md", "connections": ["SFTP", "FTP", "EMAIL"] },
         { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Invoice", "connections": ["SFTP", "FTP", "EMAIL"] },
         { "name": "Despatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Despatch%20Advice", "connections": ["SFTP", "FTP", "EMAIL"] }
       ]
@@ -39,13 +39,13 @@
         {
       "name": "OIOUBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/OIOUBL", "connections": ["SFTP", "FTP", "EMAIL", "Nemhandel"] }
       ]
     },
         {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol Network"] }
       ]
     }
   ]
