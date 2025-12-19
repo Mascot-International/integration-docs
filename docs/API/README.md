@@ -1,4 +1,4 @@
-# The MASCOT Order API is still in it's testing phase (not live yet).
+# TESTING PHASE (not live yet).
 
 # Mascot API Order – Documentation (JSON)
 
