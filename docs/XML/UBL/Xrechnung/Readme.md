@@ -1,4 +1,4 @@
-# XRechnung EN 16931 Guide
+# XRechnung EN16931 COMPLIANT
 
 This repository provides documentation and examples of how Mascot delivers invoices in **XRechnung (EN 16931)** format.
 
