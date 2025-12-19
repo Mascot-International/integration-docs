@@ -1,12 +1,5 @@
 This document explains the structure, rules, and calculation principles for a **Peppol BIS Billing 3.0 Invoice** using **UBL 2.1 XML**.
 
-It follows the **same guide structure and style** as the Mascot XML Order documentation and includes:
-- Header fields
-- Party information
-- Monetary totals
-- Invoice line structure
-- Discount handling (10% example)
-
 ---
 
 ## Table of Contents
