@@ -1,4 +1,4 @@
-# TESTING PHASE (not live yet).
+# TESTING PHASE (not live in PRODUCTION).
 
 # Mascot API Order – Documentation (JSON)
 
