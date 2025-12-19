@@ -154,7 +154,7 @@ Each `DespatchLines` element represents one despatched item.
 
 ---
 
-## Example XML Structure (All Fields Included)
+## Example XML Mascot Structure
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
