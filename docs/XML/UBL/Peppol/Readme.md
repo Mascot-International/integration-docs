@@ -17,7 +17,6 @@ It follows the **same guide structure and style** as the Mascot XML Order docume
 5. Tax and Monetary Totals
 6. Invoice Line Structure
 7. Discount Handling Rules
-8. Example Invoice (10% Discount)
 
 ---
 
