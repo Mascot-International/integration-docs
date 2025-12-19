@@ -1,12 +1,6 @@
 {
   "categories": [
     {
-      "name": "API",
-      "formats": [
-        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "connections": ["HTTP"] }
-      ]
-    },
-    {
       "name": "EDIFACT",
       "formats": [
         { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS", "connections": ["SFTP"] },
@@ -46,6 +40,12 @@
       "name": "Xrechnung",
       "formats": [
         { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol Network"] }
+      ]
+    },
+        {
+      "name": "API",
+      "formats": [
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "connections": ["HTTP"] }
       ]
     }
   ]
