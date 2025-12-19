@@ -27,7 +27,7 @@
     {
       "name": "UBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/UBL", "connections": ["SFTP", "FTP", "EMAIL"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP", "FTP", "EMAIL"] }
       ]
     },
         {
