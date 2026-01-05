@@ -21,13 +21,13 @@
     {
       "name": "UBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP", "FTP", "EMAIL"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP", "FTP", "EMAIL","Peppol-Network"] }
       ]
     },
         {
       "name": "Peppol",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/UBL/Peppol", "connections": ["SFTP", "EMAIL","Peppol Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/UBL/Peppol", "connections": ["SFTP", "EMAIL","Peppol-Network"] }
       ]
     },
         {
@@ -39,7 +39,7 @@
         {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol-Network"] }
       ]
     },
         {
