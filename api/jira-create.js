@@ -14,7 +14,19 @@ export default async function handler(req, res) {
     return res.status(405).json({ success: false, error: 'Method not allowed' });
   }
 
-  const { formatType, messages, name, company, email, notes, recaptcha } = req.body;
+  const {
+  formatType,
+  messages,
+  connection,
+  customfield_10222,
+  customfield_10299,
+  name,
+  company,
+  email,
+  notes,
+  recaptcha
+  } = req.body;
+
 
   if (!formatType || !messages || messages.length === 0 || !name || !company || !email || !recaptcha) {
     return res.status(400).json({ success: false, error: 'Missing required fields' });
