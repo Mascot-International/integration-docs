@@ -4,24 +4,24 @@
       "name": "EDIFACT",
       "formats": [
         { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDERS", "connections": ["SFTP"] },
-        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDRSP", "connections": ["SFTP", "FTP", "EMAIL"] },
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/INVOIC", "connections": ["SFTP", "FTP", "EMAIL"] },
-        { "name": "Dispatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/DESADV", "connections": ["SFTP", "FTP", "EMAIL"] }
+        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/ORDRSP", "connections": ["SFTP","EMAIL"] },
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/INVOIC", "connections": ["SFTP","EMAIL"] },
+        { "name": "Dispatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/EDIFACT/DESADV", "connections": ["SFTP","EMAIL"] }
       ]
     },
     {
       "name": "XML Mascot",
       "formats": [
         { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/Orders", "connections": ["SFTP"] },
-        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Readme.md", "connections": ["SFTP", "FTP", "EMAIL"] },
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Invoice", "connections": ["SFTP", "FTP", "EMAIL"] },
-        { "name": "Despatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/DespatchAdvice", "connections": ["SFTP", "FTP", "EMAIL"] }
+        { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Readme.md", "connections": ["SFTP","EMAIL"] },
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Invoice", "connections": ["SFTP","EMAIL"] },
+        { "name": "Despatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/DespatchAdvice", "connections": ["SFTP","EMAIL"] }
       ]
     },
     {
       "name": "UBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP", "FTP", "EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP","EMAIL","Peppol-Network"] }
       ]
     },
         {
@@ -31,15 +31,27 @@
       ]
     },
         {
-      "name": "OIOUBL",
-      "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/OIOUBL", "connections": ["SFTP", "FTP", "EMAIL", "Nemhandel"] }
-      ]
-    },
-        {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP", "FTP", "EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+      ]
+    },
+            {
+      "name": "Svefaktura",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+      ]
+    },
+            {
+      "name": "EHF",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+      ]
+    },
+            {
+      "name": "OIOUBL",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/OIOUBL", "connections": ["SFTP","EMAIL","Nemhandel"] }
       ]
     },
         {
