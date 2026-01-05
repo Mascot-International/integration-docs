@@ -69,9 +69,19 @@ export default async function handler(req, res) {
         customfield_10228: { value: "Not Started" },   // Status
         customfield_10231: { value: formatType },      // EDI Format
         customfield_10298: messages.map(m => ({ value: m })) // Message types
+
       }
     };
 
+        // --- Optional custom fields ---
+    if (customfield_10222) {
+      jiraPayload.fields.customfield_10222 = customfield_10222;
+    }
+
+    if (customfield_10299) {
+      jiraPayload.fields.customfield_10299 = customfield_10299;
+    }
+    
     // --- Send to Jira API with Basic Auth ---
     const authHeader = 'Basic ' + Buffer.from(`${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`).toString('base64');
 
