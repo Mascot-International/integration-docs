@@ -57,7 +57,7 @@
         {
       "name": "API",
       "formats": [
-        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "connections": ["HTTP"] }
+        { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/API", "connections": ["HTTPS"] }
       ]
     }
   ]
