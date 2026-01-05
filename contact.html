@@ -148,10 +148,10 @@ document.getElementById('connectionType').addEventListener('change', function ()
   switch (this.value) {
     case 'Peppol-Network':
       container.innerHTML = `
-        <label>Peppol ID Prefix (4 characters)</label>
+        <label>Peppol SchemeID Prefix (4 characters)</label>
         <input id="peppolPrefix" maxlength="4" required>
 
-        <label>Organization Code</label>
+        <label>Peppol Unique Participant ID </label>
         <input id="peppolOrg" required>
       `;
       break;
