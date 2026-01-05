@@ -42,6 +42,12 @@
   <label>Message Types</label>
   <div id="messageTypes" class="checkbox-group"></div>
 
+  <label for="connectionType">Connection Type</label>
+<select id="connectionType" disabled>
+  <option value="">-- Select Connection --</option>
+</select>
+  <div id="connectionFields"></div>
+  
   <label for="name">Your Name</label>
   <input type="text" id="name" name="name" required>
 
@@ -67,7 +73,7 @@
 <script>
 let catalogData = {};
 
-// Load catalog.json dynamically
+// ---------- Load catalog ----------
 fetch('catalog.json')
   .then(res => res.json())
   .then(data => {
@@ -81,74 +87,177 @@ fetch('catalog.json')
     });
   });
 
-// Update message types dynamically
-document.getElementById('formatType').addEventListener('change', function() {
+// ---------- Format → Message Types ----------
+document.getElementById('formatType').addEventListener('change', function () {
   const selected = this.value;
   const msgContainer = document.getElementById('messageTypes');
   msgContainer.innerHTML = '';
+  document.getElementById('connectionType').innerHTML =
+    '<option value="">-- Select Connection --</option>';
+  document.getElementById('connectionType').disabled = true;
+  document.getElementById('connectionFields').innerHTML = '';
+
   if (!selected) return;
+
   const category = catalogData.categories.find(c => c.name === selected);
   category.formats.forEach(fmt => {
     const div = document.createElement('div');
     div.innerHTML = `
-      <label for="msg-${fmt.name}">${fmt.name}</label>
-      <input type="checkbox" id="msg-${fmt.name}" name="messageTypes" value="${fmt.name}">
+      <label>${fmt.name}</label>
+      <input type="checkbox" name="messageTypes" value="${fmt.name}">
     `;
     msgContainer.appendChild(div);
   });
 });
 
-// Handle form submission
-document.getElementById('integrationForm').addEventListener('submit', function(e) {
+// ---------- Message Types → Connection Types ----------
+document.getElementById('messageTypes').addEventListener('change', () => {
+  const format = document.getElementById('formatType').value;
+  const checked = [...document.querySelectorAll('input[name="messageTypes"]:checked')]
+    .map(c => c.value);
+
+  const select = document.getElementById('connectionType');
+  select.innerHTML = '<option value="">-- Select Connection --</option>';
+  select.disabled = true;
+  document.getElementById('connectionFields').innerHTML = '';
+
+  if (!format || checked.length === 0) return;
+
+  const category = catalogData.categories.find(c => c.name === format);
+  const connections = new Set();
+
+  category.formats
+    .filter(f => checked.includes(f.name))
+    .forEach(f => f.connections.forEach(c => connections.add(c)));
+
+  connections.forEach(c => {
+    const opt = document.createElement('option');
+    opt.value = c;
+    opt.textContent = c;
+    select.appendChild(opt);
+  });
+
+  select.disabled = false;
+});
+
+// ---------- Connection → Dynamic Fields ----------
+document.getElementById('connectionType').addEventListener('change', function () {
+  const container = document.getElementById('connectionFields');
+  container.innerHTML = '';
+
+  switch (this.value) {
+    case 'Peppol-Network':
+      container.innerHTML = `
+        <label>Peppol ID Prefix (4 characters)</label>
+        <input id="peppolPrefix" maxlength="4" required>
+
+        <label>Organization Code</label>
+        <input id="peppolOrg" required>
+      `;
+      break;
+
+    case 'SFTP':
+      container.innerHTML = `
+        <label>Unique ID / GLN / EDI number</label>
+        <input id="customerId" required>
+
+        <label>Whitelisting of IP address(es)</label>
+        <input id="whitelistIp">
+      `;
+      break;
+
+    case 'EMAIL':
+      container.innerHTML = `
+        <label>Receiver Email</label>
+        <input id="customerId" type="email" required>
+      `;
+      break;
+
+    case 'Nemhandel':
+      container.innerHTML = `
+        <label>Danish CVR or GLN number</label>
+        <input id="customerId" required>
+      `;
+      break;
+
+    case 'HTTPS':
+      container.innerHTML = `
+        <label>API Client Identifier</label>
+        <input id="customerId" required>
+      `;
+      break;
+  }
+});
+
+// ---------- Submit ----------
+document.getElementById('integrationForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const formatType = document.getElementById('formatType').value;
-  const messages = Array.from(document.querySelectorAll('input[name="messageTypes"]:checked')).map(c => c.value);
-  const name = document.getElementById('name').value;
-  const company = document.getElementById('company').value;
-  const email = document.getElementById('email').value;
-  const notes = document.getElementById('notes').value;
+  const formatType = formatTypeEl.value;
+  const messages = [...document.querySelectorAll('input[name="messageTypes"]:checked')]
+    .map(c => c.value);
+  const connection = document.getElementById('connectionType').value;
+
+  const name = nameEl.value;
+  const company = companyEl.value;
+  const email = emailEl.value;
+  const notes = notesEl.value;
   const recaptcha = grecaptcha.getResponse();
 
-  const responseMessage = document.getElementById('responseMessage');
-  responseMessage.className = '';
-  responseMessage.textContent = '';
+  let customfield_10222 = null;
+  let customfield_10299 = null;
 
-  if (!formatType || messages.length === 0) {
-    responseMessage.textContent = 'Please select a format type and at least one message type.';
+  if (!formatType || messages.length === 0 || !connection) {
+    responseMessage.textContent = 'Please select format, message type, and connection.';
     responseMessage.className = 'error';
     return;
   }
 
-  if (!recaptcha) {
-    responseMessage.textContent = 'Please complete the reCAPTCHA.';
-    responseMessage.className = 'error';
-    return;
+  if (connection === 'Peppol-Network') {
+    customfield_10222 =
+      document.getElementById('peppolPrefix').value +
+      ':' +
+      document.getElementById('peppolOrg').value;
   }
 
-  // Send data to serverless Jira function
+  if (connection === 'SFTP') {
+    customfield_10222 = document.getElementById('customerId').value;
+    customfield_10299 = document.getElementById('whitelistIp').value;
+  }
+
+  if (['EMAIL', 'Nemhandel', 'HTTPS'].includes(connection)) {
+    customfield_10222 = document.getElementById('customerId').value;
+  }
+
   fetch('https://integration-docs-olive.vercel.app/api/jira-create', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ formatType, messages, name, company, email, notes, recaptcha })
+    body: JSON.stringify({
+      formatType,
+      messages,
+      connection,
+      customfield_10222,
+      customfield_10299,
+      name,
+      company,
+      email,
+      notes,
+      recaptcha
+    })
   })
-  .then(res => res.json())
-  .then(resp => {
-    if (resp.success) {
-      responseMessage.textContent = 'Request submitted successfully!';
-      responseMessage.className = 'success';
-      this.reset();
-      document.getElementById('messageTypes').innerHTML = '';
+    .then(res => res.json())
+    .then(resp => {
+      responseMessage.textContent = resp.success
+        ? 'Request submitted successfully!'
+        : resp.error || 'Submission failed.';
+      responseMessage.className = resp.success ? 'success' : 'error';
+      if (resp.success) this.reset();
       grecaptcha.reset();
-    } else {
-      responseMessage.textContent = resp.error || 'Submission failed.';
+    })
+    .catch(() => {
+      responseMessage.textContent = 'Submission failed.';
       responseMessage.className = 'error';
-    }
-  })
-  .catch(() => {
-    responseMessage.textContent = 'Submission failed.';
-    responseMessage.className = 'error';
-  });
+    });
 });
 </script>
 
