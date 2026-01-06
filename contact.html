@@ -89,7 +89,7 @@
 let catalogData = {};
 
 // ---------- Load catalog ----------
-fetch('/integration-docs/catalog.json')
+fetch('./catalog.json')
   .then(res => {
     if (!res.ok) throw new Error('Failed to load catalog.json');
     return res.json();
@@ -97,6 +97,10 @@ fetch('/integration-docs/catalog.json')
   .then(data => {
     catalogData = data;
     const formatSelect = document.getElementById('formatType');
+
+    // clear existing options except placeholder
+    formatSelect.innerHTML = '<option value="">-- Select Format --</option>';
+
     data.categories.forEach(cat => {
       const option = document.createElement('option');
       option.value = cat.name;
@@ -105,9 +109,10 @@ fetch('/integration-docs/catalog.json')
     });
   })
   .catch(err => {
-    console.error(err);
+    console.error('Catalog load error:', err);
     alert('Failed to load integration catalog.');
   });
+
 
 
 // ---------- Format → Message Types ----------
