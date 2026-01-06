@@ -105,6 +105,9 @@ export default async function handler(req, res) {
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
     // --- Send notification email ---
+    const jiraData = await jiraResponse.json();
+    const issueKey = jiraData.key;
+    const jiraIssueUrl = `${process.env.JIRA_BASE_URL}/browse/${issueKey}`;
 try {
   await resend.emails.send({
     from: process.env.FROM_EMAIL,
@@ -112,6 +115,10 @@ try {
     subject: `New Integration Request – ${company}`,
     html: `
       <h2>New Integration Request</h2>
+      <p>
+      <strong>Jira Ticket:</strong>
+      <a href="${jiraIssueUrl}" target="_blank">${issueKey}</a>
+      </p>
       <p><strong>Company:</strong> ${company}</p>
       <p><strong>Contact:</strong> ${name} (${email})</p>
       <p><strong>Format:</strong> ${formatType}</p>
