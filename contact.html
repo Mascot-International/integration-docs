@@ -193,15 +193,19 @@ document.getElementById('connectionType').addEventListener('change', function ()
 document.getElementById('integrationForm').addEventListener('submit', function (e) {
   e.preventDefault();
 
-  const formatType = formatTypeEl.value;
+  const responseMessage = document.getElementById('responseMessage');
+  responseMessage.textContent = '';
+  responseMessage.className = '';
+
+  const formatType = document.getElementById('formatType').value;
   const messages = [...document.querySelectorAll('input[name="messageTypes"]:checked')]
     .map(c => c.value);
   const connection = document.getElementById('connectionType').value;
 
-  const name = nameEl.value;
-  const company = companyEl.value;
-  const email = emailEl.value;
-  const notes = notesEl.value;
+  const name = document.getElementById('name').value;
+  const company = document.getElementById('company').value;
+  const email = document.getElementById('email').value;
+  const notes = document.getElementById('notes').value;
   const recaptcha = grecaptcha.getResponse();
 
   let customfield_10222 = null;
@@ -209,6 +213,12 @@ document.getElementById('integrationForm').addEventListener('submit', function (
 
   if (!formatType || messages.length === 0 || !connection) {
     responseMessage.textContent = 'Please select format, message type, and connection.';
+    responseMessage.className = 'error';
+    return;
+  }
+
+  if (!recaptcha) {
+    responseMessage.textContent = 'Please complete the reCAPTCHA.';
     responseMessage.className = 'error';
     return;
   }
@@ -254,7 +264,8 @@ document.getElementById('integrationForm').addEventListener('submit', function (
       if (resp.success) this.reset();
       grecaptcha.reset();
     })
-    .catch(() => {
+    .catch(err => {
+      console.error(err);
       responseMessage.textContent = 'Submission failed.';
       responseMessage.className = 'error';
     });
