@@ -90,7 +90,10 @@ let catalogData = {};
 
 // ---------- Load catalog ----------
 fetch('/integration-docs/catalog.json')
-  .then(res => res.json())
+  .then(res => {
+    if (!res.ok) throw new Error('Failed to load catalog.json');
+    return res.json();
+  })
   .then(data => {
     catalogData = data;
     const formatSelect = document.getElementById('formatType');
@@ -100,7 +103,12 @@ fetch('/integration-docs/catalog.json')
       option.textContent = cat.name;
       formatSelect.appendChild(option);
     });
+  })
+  .catch(err => {
+    console.error(err);
+    alert('Failed to load integration catalog.');
   });
+
 
 // ---------- Format → Message Types ----------
 document.getElementById('formatType').addEventListener('change', function () {
