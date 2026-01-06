@@ -60,26 +60,25 @@ export default async function handler(req, res) {
     }
 
     // --- Build Jira payload ---
-    const jiraPayload = {
-      fields: {
-        project: { key: process.env.JIRA_PROJECT_KEY },
-        summary: `New Integration Request - ${company}`,
-        description: {
-          type: "doc",
-          version: 1,
-          content: [
-            { type: "paragraph", content: [ { text: notes || 'No additional notes provided', type: "text" } ] }
-          ]
-        },
-        issuetype: { name: process.env.JIRA_ISSUE_TYPE || "LOB_MAP" },
-        customfield_10220: company,                     // Customer Name
-        customfield_10218: `${name} - ${email}`,       // Contact Person
-        customfield_10228: { value: "Not Started" },   // Status
-        customfield_10231: { value: formatType },      // EDI Format
-        customfield_10298: messages.map(m => ({ value: m })) // Message types
-
-      }
-    };
+  const jiraPayload = {
+    fields: {
+      project: { key: process.env.JIRA_PROJECT_KEY },
+      summary: `New Integration Request - ${company}`,
+      description: {
+        type: "doc",
+        version: 1,
+        content: [
+          { type: "paragraph", content: [ { text: notes || 'No additional notes provided', type: "text" } ] }
+        ]
+      },
+      issuetype: { name: process.env.JIRA_ISSUE_TYPE || "LOB_MAP" },
+      customfield_10220: company,
+      customfield_10218: `${name} - ${email}`,
+      customfield_10228: { value: "Not Started" },
+      customfield_10231: { value: formatType },
+      customfield_10298: messages.map(m => ({ value: m }))
+    }
+  };
 
         // --- Optional custom fields ---
     if (customfield_10222) {
