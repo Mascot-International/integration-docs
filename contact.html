@@ -313,7 +313,11 @@ fetch('https://integration-docs-olive.vercel.app/api/jira-create', {
     responseMessage.textContent = 'Submission failed.';
     responseMessage.className = 'error';
   })
-    });
+  .finally(() => {
+    submitBtn.disabled = false;
+    submitBtn.style.opacity = '1';
+    spinner.style.display = 'none';
+  });
 });
 </script>
 
