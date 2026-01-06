@@ -1,3 +1,7 @@
+import { Resend } from 'resend';
+
+const resend = new Resend(process.env.RESEND_API_KEY);
+
 let rateLimitStore = {}; // Simple in-memory store (resets on cold start)
 
 export default async function handler(req, res) {
