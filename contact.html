@@ -89,7 +89,7 @@
 let catalogData = {};
 
 // ---------- Load catalog ----------
-fetch('catalog.json')
+fetch('/integration-docs/catalog.json')
   .then(res => res.json())
   .then(data => {
     catalogData = data;
