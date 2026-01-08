@@ -2,10 +2,6 @@ export const config = {
   runtime: 'nodejs'
 };
 
-import { Resend } from 'resend';
-
-const resend = new Resend(process.env.RESEND_API_KEY);
-
 let rateLimitStore = {}; // Simple in-memory store (resets on cold start)
 
 export default async function handler(req, res) {
@@ -112,37 +108,7 @@ export default async function handler(req, res) {
       console.error('Jira API error:', errorText);
       return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
     }
-    // --- Send notification email ---
-    const jiraData = await jiraResponse.json();
-    const issueKey = jiraData.key;
-    const jiraIssueUrl = `${process.env.JIRA_BASE_URL}/browse/${issueKey}`;
-try {
-  await resend.emails.send({
-    from: process.env.FROM_EMAIL,
-    to: process.env.NOTIFY_EMAIL,
-    subject: `New Integration Request – ${company}`,
-    html: `
-      <h2>New Integration Request</h2>
-      <p>
-      <strong>Jira Ticket:</strong>
-      <a href="${jiraIssueUrl}" target="_blank">${issueKey}</a>
-      </p>
-      <p><strong>Company:</strong> ${company}</p>
-      <p><strong>Contact:</strong> ${name} (${email})</p>
-      <p><strong>Format:</strong> ${formatType}</p>
-      <p><strong>Messages:</strong> ${messages.join(', ')}</p>
-      <p><strong>Connection:</strong> ${connection}</p>
-      ${customfield_10222 ? `<p><strong>Customer ID:</strong> ${customfield_10222}</p>` : ''}
-      ${customfield_10299 ? `<p><strong>Whitelisted IP(s):</strong> ${customfield_10299}</p>` : ''}
-      <hr>
-      <p>${notes || 'No additional notes'}</p>
-    `
-  });
-} catch (emailError) {
-  console.error('Email notification failed:', emailError);
-  // DO NOT fail the request — Jira ticket already exists
-}
-
+    await jiraResponse.json();
 
     // --- Update rate limit ---
     rateLimitStore[ip] = now;
