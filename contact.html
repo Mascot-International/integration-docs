@@ -235,6 +235,7 @@ document.getElementById('integrationForm').addEventListener('submit', function (
 
   const name = document.getElementById('name').value;
   const company = document.getElementById('company').value;
+  const accountNumber = document.getElementById('accountNumber').value || null;
   const email = document.getElementById('email').value;
   const notes = document.getElementById('notes').value;
   const recaptcha = grecaptcha.getResponse();
@@ -286,6 +287,7 @@ fetch('https://integration-docs-olive.vercel.app/api/jira-create', {
     connection,
     customfield_10222,
     customfield_10299,
+    customfield_10244: accountNumber,
     name,
     company,
     email,
