@@ -28,6 +28,7 @@ export default async function handler(req, res) {
   connection,
   customfield_10222,
   customfield_10299,
+  customfield_10244,
   name,
   company,
   email,
@@ -88,6 +89,9 @@ export default async function handler(req, res) {
 
     if (customfield_10299) {
       jiraPayload.fields.customfield_10299 = customfield_10299;
+    }
+    if (customfield_10244) {
+      jiraPayload.fields.customfield_10244 = customfield_10244;
     }
     
     // --- Send to Jira API with Basic Auth ---
