@@ -1,0 +1,199 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>View Integration Status - Mascot</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #f9f9f9;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  header img {
+    height: 60px;
+    margin-right: 15px;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  form {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    max-width: 500px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    font-weight: bold;
+  }
+
+  input, select {
+    width: 100%;
+    padding: 8px;
+    margin-top: 5px;
+    border-radius: 6px;
+    border: 1px solid #ccc;
+  }
+
+  button {
+    margin-top: 20px;
+    width: 100%;
+    padding: 12px;
+    background: #339af0;
+    color: #fff;
+    border: none;
+    border-radius: 6px;
+    font-size: 1em;
+    cursor: pointer;
+  }
+
+  button:hover {
+    background: #1c7ed6;
+  }
+
+  .status-box {
+    margin-top: 20px;
+    padding: 15px;
+    border-radius: 6px;
+    display: none;
+  }
+
+  .success {
+    background: #e6fcf5;
+    border: 1px solid #38d9a9;
+    color: #087f5b;
+  }
+
+  .error {
+    background: #fff5f5;
+    border: 1px solid #ffa8a8;
+    color: #c92a2a;
+  }
+
+  .status-badge {
+    display: inline-block;
+    padding: 6px 12px;
+    border-radius: 12px;
+    font-weight: bold;
+    margin-top: 10px;
+  }
+
+  .Not\ Started { background: #adb5bd; color: #fff; }
+  .On-going { background: #339af0; color: #fff; }
+  .Awaiting\ Customer\ Response { background: #fab005; color: #000; }
+  .Blocked { background: #fa5252; color: #fff; }
+  .Completed { background: #51cf66; color: #fff; }
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="images/mascot-logo.png" alt="Mascot Logo">
+  <h1>View Integration Status</h1>
+</header>
+
+<form id="statusForm">
+  <label for="accountNumber">Mascot Customer Account Number</label>
+  <input
+    type="text"
+    id="accountNumber"
+    required
+    placeholder="e.g. 123456"
+  >
+
+  <label for="formatType">Format Type</label>
+  <select id="formatType" required>
+    <option value="">-- Select Format --</option>
+  </select>
+
+  <button type="submit">Check Status</button>
+
+  <div id="result" class="status-box"></div>
+</form>
+
+<script>
+let catalogData = {};
+
+// ---------- Load formats ----------
+fetch('./catalog.json')
+  .then(res => res.json())
+  .then(data => {
+    catalogData = data;
+    const select = document.getElementById('formatType');
+
+    data.categories.forEach(cat => {
+      const opt = document.createElement('option');
+      opt.value = cat.name;
+      opt.textContent = cat.name;
+      select.appendChild(opt);
+    });
+  });
+
+// ---------- Submit ----------
+document.getElementById('statusForm').addEventListener('submit', async (e) => {
+  e.preventDefault();
+
+  const accountNumber = document.getElementById('accountNumber').value.trim();
+  const formatType = document.getElementById('formatType').value;
+  const result = document.getElementById('result');
+
+  result.style.display = 'none';
+  result.className = 'status-box';
+
+  if (!accountNumber || !formatType) {
+    result.textContent = 'Please enter account number and format type.';
+    result.classList.add('error');
+    result.style.display = 'block';
+    return;
+  }
+
+  try {
+    const res = await fetch(
+      'https://integration-docs-olive.vercel.app/api/jira-status',
+      {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ accountNumber, formatType })
+      }
+    );
+
+    const data = await res.json();
+
+    if (!res.ok || !data.found) {
+      throw new Error(data.error || 'Integration request not found.');
+    }
+
+    result.innerHTML = `
+      <strong>Integration Status:</strong><br>
+      <span class="status-badge ${data.status}">
+        ${data.status}
+      </span>
+    `;
+    result.classList.add('success');
+
+  } catch (err) {
+    result.textContent = err.message;
+    result.classList.add('error');
+  }
+
+  result.style.display = 'block';
+});
+</script>
+
+</body>
+</html>
