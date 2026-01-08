@@ -208,7 +208,7 @@ document.getElementById('connectionType').addEventListener('change', function ()
       `;
       break;
 
-    case 'HTTPS':
+    case 'HTTP':
       container.innerHTML = `
         <label>API Client Identifier</label>
         <input id="customerId" required>
@@ -263,7 +263,7 @@ document.getElementById('integrationForm').addEventListener('submit', function (
     customfield_10299 = document.getElementById('whitelistIp').value;
   }
 
-  if (['EMAIL', 'Nemhandel', 'HTTPS'].includes(connection)) {
+  if (['EMAIL', 'Nemhandel', 'HTTP'].includes(connection)) {
     customfield_10222 = document.getElementById('customerId').value;
   }
 
