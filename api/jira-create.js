@@ -76,6 +76,7 @@ export default async function handler(req, res) {
       customfield_10231: { value: formatType },
       customfield_10298: messages.map(m => ({ value: m })),
       customfield_10229: { value: connection }
+      }
   };
 
         // --- Optional custom fields ---
