@@ -3,7 +3,7 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>View Integration Status - Mascot</title>
+<title>Integration Status – Mascot</title>
 
 <style>
   body {
@@ -55,48 +55,48 @@
     padding: 12px;
     background: #339af0;
     color: #fff;
-    border: none;
     border-radius: 6px;
+    border: none;
     font-size: 1em;
     cursor: pointer;
   }
 
-  button:hover {
-    background: #1c7ed6;
+  button:disabled {
+    opacity: 0.6;
+    cursor: not-allowed;
+  }
+
+  .spinner {
+    width: 36px;
+    height: 36px;
+    border: 4px solid #e0e0e0;
+    border-top: 4px solid #339af0;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+    margin: 20px auto;
+  }
+
+  @keyframes spin {
+    to { transform: rotate(360deg); }
   }
 
   .status-box {
     margin-top: 20px;
     padding: 15px;
     border-radius: 6px;
-    display: none;
-  }
-
-  .success {
-    background: #e6fcf5;
-    border: 1px solid #38d9a9;
-    color: #087f5b;
-  }
-
-  .error {
-    background: #fff5f5;
-    border: 1px solid #ffa8a8;
-    color: #c92a2a;
-  }
-
-  .status-badge {
-    display: inline-block;
-    padding: 6px 12px;
-    border-radius: 12px;
+    text-align: center;
     font-weight: bold;
-    margin-top: 10px;
   }
 
-  .Not\ Started { background: #adb5bd; color: #fff; }
-  .On-going { background: #339af0; color: #fff; }
-  .Awaiting\ Customer\ Response { background: #fab005; color: #000; }
-  .Blocked { background: #fa5252; color: #fff; }
-  .Completed { background: #51cf66; color: #fff; }
+  .success { background: #e6fcf5; color: #087f5b; }
+  .error { background: #fff5f5; color: #c92a2a; }
+
+  .back-link {
+    display: inline-block;
+    margin-top: 20px;
+    color: #339af0;
+    text-decoration: none;
+  }
 </style>
 </head>
 
@@ -104,7 +104,7 @@
 
 <header>
   <img src="images/mascot-logo.png" alt="Mascot Logo">
-  <h1>View Integration Status</h1>
+  <h1>Integration Status</h1>
 </header>
 
 <form id="statusForm">
@@ -112,58 +112,58 @@
   <input
     type="text"
     id="accountNumber"
-    required
     placeholder="e.g. 123456"
+    required
   >
 
-  <label for="formatType">Format Type</label>
+  <label for="formatType">Format</label>
   <select id="formatType" required>
     <option value="">-- Select Format --</option>
+    <option value="EDIFACT">EDIFACT</option>
+    <option value="XML Mascot">XML Mascot</option>
+    <option value="UBL">UBL</option>
+    <option value="Peppol">Peppol</option>
+    <option value="Xrechnung">Xrechnung</option>
+    <option value="Svefaktura">Svefaktura</option>
+    <option value="EHF">EHF</option>
+    <option value="OIOUBL">OIOUBL</option>
+    <option value="API">API</option>
   </select>
 
   <button type="submit">Check Status</button>
 
-  <div id="result" class="status-box"></div>
+  <div id="spinner" style="display:none;">
+    <div class="spinner"></div>
+    <div style="text-align:center;">Checking integration status…</div>
+  </div>
+
+  <div id="result"></div>
 </form>
 
+<a class="back-link" href="index.html">← Back to integrations</a>
+
 <script>
-let catalogData = {};
-
-// ---------- Load formats ----------
-fetch('./catalog.json')
-  .then(res => res.json())
-  .then(data => {
-    catalogData = data;
-    const select = document.getElementById('formatType');
-
-    data.categories.forEach(cat => {
-      const opt = document.createElement('option');
-      opt.value = cat.name;
-      opt.textContent = cat.name;
-      select.appendChild(opt);
-    });
-  });
-
-// ---------- Submit ----------
-document.getElementById('statusForm').addEventListener('submit', async (e) => {
+document.getElementById('statusForm').addEventListener('submit', async function (e) {
   e.preventDefault();
 
   const accountNumber = document.getElementById('accountNumber').value.trim();
   const formatType = document.getElementById('formatType').value;
+  const button = this.querySelector('button');
+  const spinner = document.getElementById('spinner');
   const result = document.getElementById('result');
 
-  result.style.display = 'none';
-  result.className = 'status-box';
+  result.innerHTML = '';
 
   if (!accountNumber || !formatType) {
-    result.textContent = 'Please enter account number and format type.';
-    result.classList.add('error');
-    result.style.display = 'block';
+    result.innerHTML = '<div class="status-box error">Please fill in all fields.</div>';
     return;
   }
 
+  button.disabled = true;
+  spinner.style.display = 'block';
+
   try {
-    const res = await fetch(
+    const response = await fetch(
       'https://integration-docs-olive.vercel.app/api/jira-status',
       {
         method: 'POST',
@@ -172,26 +172,33 @@ document.getElementById('statusForm').addEventListener('submit', async (e) => {
       }
     );
 
-    const data = await res.json();
+    const data = await response.json();
 
-    if (!res.ok || !data.found) {
-      throw new Error(data.error || 'Integration request not found.');
+    if (data.found) {
+      result.innerHTML = `
+        <div class="status-box success">
+          Current status: <br><br>
+          <strong>${data.status}</strong>
+        </div>
+      `;
+    } else {
+      result.innerHTML = `
+        <div class="status-box error">
+          ${data.error || 'Integration request not found.'}
+        </div>
+      `;
     }
-
-    result.innerHTML = `
-      <strong>Integration Status:</strong><br>
-      <span class="status-badge ${data.status}">
-        ${data.status}
-      </span>
-    `;
-    result.classList.add('success');
-
   } catch (err) {
-    result.textContent = err.message;
-    result.classList.add('error');
+    console.error(err);
+    result.innerHTML = `
+      <div class="status-box error">
+        Unable to check status. Please try again later.
+      </div>
+    `;
+  } finally {
+    button.disabled = false;
+    spinner.style.display = 'none';
   }
-
-  result.style.display = 'block';
 });
 </script>
 
