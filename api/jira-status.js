@@ -17,7 +17,9 @@ export default async function handler(req, res) {
   const { accountNumber, formatType } = req.body;
 
   if (!accountNumber || !formatType) {
-    return res.status(400).json({ error: 'Missing account number or format type' });
+    return res.status(400).json({
+      error: 'Missing account number or format type'
+    });
   }
 
   try {
@@ -35,7 +37,7 @@ export default async function handler(req, res) {
       ).toString('base64');
 
     const jiraResponse = await fetch(
-      `${process.env.JIRA_BASE_URL}/rest/api/3/search`,
+      `${process.env.JIRA_BASE_URL}/rest/api/3/search/jql`,
       {
         method: 'POST',
         headers: {
@@ -46,7 +48,11 @@ export default async function handler(req, res) {
         body: JSON.stringify({
           jql,
           maxResults: 1,
-          fields: ['summary', 'customfield_10228', 'status', 'key']
+          fields: [
+            'summary',
+            'status',
+            'customfield_10228'
+          ]
         })
       }
     );
@@ -54,7 +60,9 @@ export default async function handler(req, res) {
     if (!jiraResponse.ok) {
       const text = await jiraResponse.text();
       console.error('Jira search error:', text);
-      return res.status(500).json({ error: 'Failed to query Jira' });
+      return res.status(500).json({
+        error: 'Failed to query Jira'
+      });
     }
 
     const data = await jiraResponse.json();
@@ -78,6 +86,8 @@ export default async function handler(req, res) {
     });
   } catch (err) {
     console.error('Status lookup failed:', err);
-    res.status(500).json({ error: 'Failed to query status' });
+    res.status(500).json({
+      error: 'Failed to query status'
+    });
   }
 }
