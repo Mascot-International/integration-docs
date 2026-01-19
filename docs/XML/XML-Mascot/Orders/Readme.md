@@ -130,7 +130,7 @@ For **B2C orders (Ordertype = ZE)**, additional fields are required:
 ## XML Schema Definition (XSD)
 
 The XML structure is defined in the official XSD schema:  
-[**XML_Mascot_Order.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/XML_Mascot_Order.xsd)
+[**XML_Mascot_Order.xsd**](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/Orders/XML_Mascot_Order.xsd)
 
 ---
 
@@ -138,7 +138,7 @@ The XML structure is defined in the official XSD schema:
 
 Here are links to example XML files provided by Mascot:
 
-- [Standard Delivery Address](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/Examples/Order_Mascot_Example_1_StandardDeliveryAddress.xml)
-- [Delivery By Number](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/Examples/Order_Mascot_Example_2_DeliveryByNumber.xml)
-- [Delivery By Address](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/Examples/Order_Mascot_Example_3_DeliveryByAddress.xml)
-- [Dropshipment](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Orders/Examples/Order_Mascot_Example_4_Dropshipment.xml)
+- [Standard Delivery Address](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/Orders/Examples/Order_Mascot_Example_1_StandardDeliveryAddress.xml)
+- [Delivery By Number](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/Orders/Examples/Order_Mascot_Example_2_DeliveryByNumber.xml)
+- [Delivery By Address](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/Orders/Examples/Order_Mascot_Example_3_DeliveryByAddress.xml)
+- [Dropshipment](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/Orders/Examples/Order_Mascot_Example_4_Dropshipment.xml)
