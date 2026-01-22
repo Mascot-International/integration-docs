@@ -179,7 +179,7 @@ document.getElementById('connectionType').addEventListener('change', function ()
   container.innerHTML = '';
 
   switch (this.value) {
-    case 'Peppol-Network':
+    case 'PeppolNetwork':
       container.innerHTML = `
         <label>Peppol SchemeID Prefix (4 characters)</label>
         <input id="peppolPrefix" maxlength="4" required>
@@ -257,7 +257,7 @@ document.getElementById('integrationForm').addEventListener('submit', function (
     return;
   }
 
-  if (connection === 'Peppol-Network') {
+  if (connection === 'PeppolNetwork') {
     customfield_10222 =
       document.getElementById('peppolPrefix').value +
       ':' +
