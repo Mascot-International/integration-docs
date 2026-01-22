@@ -21,31 +21,31 @@
     {
       "name": "UBL",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL", "connections": ["SFTP","EMAIL","PeppolNetwork"] }
       ]
     },
         {
       "name": "Peppol",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/UBL/Peppol", "connections": ["SFTP", "EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/UBL/Peppol", "connections": ["SFTP", "EMAIL","PeppolNetwork"] }
       ]
     },
         {
       "name": "Xrechnung",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","PeppolNetwork"] }
       ]
     },
             {
       "name": "Svefaktura",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","PeppolNetwork"] }
       ]
     },
             {
       "name": "EHF",
       "formats": [
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","Peppol-Network"] }
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/Xrechnung", "connections": ["SFTP","EMAIL","PeppolNetwork"] }
       ]
     },
             {
