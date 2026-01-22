@@ -69,7 +69,10 @@ export default async function handler(req, res) {
         ]
       },
       issuetype: { name: process.env.JIRA_ISSUE_TYPE || "LOB_MAP" },
-      labels: ['api-created'],
+      labels: [
+      'api-created',
+      formatType.toLowerCase().replace(/\s+/g, '-')
+      ],
       customfield_10220: company,
       customfield_10218: `${name} - ${email}`,
       customfield_10228: { value: "Not Started" },
