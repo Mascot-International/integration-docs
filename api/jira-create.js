@@ -57,11 +57,6 @@ export default async function handler(req, res) {
     }
 
     // --- Build Jira payload ---
-  const safeFormatLabel = formatType
-    .toLowerCase()
-    .replace(/[^a-z0-9]+/g, '-') // remove EVERYTHING invalid
-    .replace(/^-|-$/g, '');     // trim hyphens
-    
   const jiraPayload = {
     fields: {
       project: { key: process.env.JIRA_PROJECT_KEY },
@@ -74,7 +69,7 @@ export default async function handler(req, res) {
         ]
       },
       issuetype: { name: process.env.JIRA_ISSUE_TYPE || "LOB_MAP" },
-      labels: ['api-created', safeFormatLabel],
+      labels: ['api-created'],
       customfield_10220: company,
       customfield_10218: `${name} - ${email}`,
       customfield_10228: { value: "Not Started" },
