@@ -170,8 +170,8 @@ The XML structure is defined in the official XSD schema:
 
 Here are links to example XML Order Responses:
 
-- [Standard Order Response](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Order%20Response/Examples/OrderResponse_Standard.xml)  
-- [With Discounts and Charges](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Order%20Response/Examples/OrderResponse_DiscountsCharges.xml)  
-- [With Multiple Deliveries](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/Order%20Response/Examples/OrderResponse_MultiDelivery.xml)
+- [Standard Order Response](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Examples/OrderResponse_Standard.xml)  
+- [With Discounts and Charges](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Examples/OrderResponse_DiscountsCharges.xml)  
+- [With Multiple Deliveries](https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Examples/OrderResponse_MultiDelivery.xml)
 
 ---
