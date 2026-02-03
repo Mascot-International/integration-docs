@@ -196,7 +196,7 @@
                     <s:element name="EmailAddress">
                       <s:simpleType>
                         <s:restriction base="s:string">
-                          <s:maxLength value="30"/>
+                          <s:maxLength value="50"/>
                         </s:restriction>
                       </s:simpleType>
                     </s:element>
