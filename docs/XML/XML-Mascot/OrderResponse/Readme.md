@@ -53,8 +53,8 @@ It includes **header**, **order line**, and **totals** fields, as well as detail
 | `<OrderResponseDate>` | Date | **M** | Date when Mascot generated the response. | `2023-09-01` |
 | `<RequestedDeliveryDate>` | Date | **O** | Delivery date requested by the buyer. | `2023-09-02` |
 | `<OrderCurrency>` | ISO 4217 (3-letter code) | **M** | Currency of the order. | `EUR` |
-| `TermsOfDelivery` | **O** | Delivery terms description |
-| `TermsOfDeliveryCode` | **R** | Incoterms code (e.g. DAP) |
+| `TermsOfDelivery` | Text | **O** | Delivery terms description | `delivery condition text` |
+| `TermsOfDeliveryCode` | Text | **R** | Incoterms code (e.g. DAP) | `DAP` |
 | `<DeliveryText>` | Text | **O** | Human-readable description of delivery terms. | `Delivered Duty Paid` |
 
 ---
