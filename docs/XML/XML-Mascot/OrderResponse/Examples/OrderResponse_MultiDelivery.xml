@@ -12,7 +12,8 @@
   <OrderResponseDate>2025-01-10</OrderResponseDate>
   <RequestedDeliveryDate>2025-01-28</RequestedDeliveryDate>
   <OrderCurrency>EUR</OrderCurrency>
-  <DeliveryTerms>DDP</DeliveryTerms>
+  <TermsOfDelivery>1234</TermsOfDelivery>
+  <TermsOfDeliveryCode>DDP</TermsOfDeliveryCode>
   <DeliveryText>Delivered Duty Paid</DeliveryText>
 
   <BuyerParty>
