@@ -23,8 +23,8 @@
         <s:element name="OrderResponseDate" type="s:date"/>
         <s:element name="RequestedDeliveryDate" type="s:date" minOccurs="0"/>
         <s:element name="OrderCurrency" type="s:string" minOccurs="1" maxOccurs="1"/>
-        <s:element name="DeliveryOfTerms" type="s:string" minOccurs="0"/>
-        <s:element name="DeliveryOfTermsCode" type="s:string" minOccurs="1" maxOccurs="1"/>
+        <s:element name="TermsOfDelivery" type="s:string" minOccurs="0"/>
+        <s:element name="TermsOfDeliveryCode" type="s:string" minOccurs="1" maxOccurs="1"/>
         <s:element name="DeliveryText" type="s:string" minOccurs="0"/>
 
         <!-- Parties -->
