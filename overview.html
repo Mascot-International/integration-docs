@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EDI Integration – B2B Shop & Dropshipment</title>
+
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+    background: #f9f9f9;
+    color: #1a1a1a;
+  }
+
+  header {
+    display: flex;
+    align-items: center;
+    margin-bottom: 20px;
+  }
+
+  header img {
+    height: 60px;
+    margin-right: 15px;
+    flex-shrink: 0;
+  }
+
+  h1 {
+    margin: 0;
+  }
+
+  .box {
+    background: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0,0,0,0.05);
+    margin-bottom: 20px;
+  }
+
+  details {
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    padding: 10px 15px;
+    background: #fff;
+    margin-bottom: 15px;
+  }
+
+  summary {
+    font-weight: bold;
+    cursor: pointer;
+    list-style: none;
+  }
+
+  summary::-webkit-details-marker {
+    display: none;
+  }
+
+  summary::before {
+    content: "▸";
+    margin-right: 8px;
+  }
+
+  details[open] summary::before {
+    content: "▾";
+  }
+
+  .split {
+    display: flex;
+    gap: 20px;
+    margin-top: 15px;
+  }
+
+  .split > div {
+    flex: 1;
+  }
+
+  @media (max-width: 768px) {
+    .split {
+      flex-direction: column;
+    }
+  }
+
+  ul {
+    margin-left: 20px;
+  }
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+    font-size: 0.95em;
+  }
+
+  th, td {
+    text-align: left;
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+    vertical-align: top;
+  }
+
+  th {
+    background: #f5f7f9;
+  }
+
+  a {
+    color: #007bff;
+    text-decoration: none;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .cta a {
+    display: inline-block;
+    padding: 12px 20px;
+    background: #339af0;
+    color: #fff;
+    border-radius: 6px;
+    text-decoration: none;
+    font-size: 1em;
+  }
+
+  .cta a:hover {
+    background: #1c7ed6;
+  }
+
+  .note {
+    font-style: italic;
+    color: #555;
+    font-size: 0.9em;
+  }
+</style>
+</head>
+
+<body>
+
+<header>
+  <img src="images/mascot-logo.png" alt="Mascot Logo">
+  <h1>EDI Integration – B2B Shop & Dropshipment</h1>
+</header>
+
+<div class="box">
+  <p>
+    This page provides a high-level overview of Mascot’s EDI integration options,
+    to help you choose the right setup before moving on to the technical documentation.
+  </p>
+</div>
+
+<div class="box">
+  <h2>Overview</h2>
+  <p>
+    The same EDI foundation supports both <strong>B2B Shop</strong> and
+    <strong>Dropshipment</strong>.  
+    The difference lies in how goods are delivered and how your business operates.
+  </p>
+</div>
+
+<div class="box">
+
+  <details>
+    <summary>B2B Shop</summary>
+    <p>
+      The B2B Shop setup is intended for retailers purchasing goods to their own warehouse.
+    </p>
+    <ul>
+      <li>Delivery to retailer address</li>
+      <li>Retailer owns and manages inventory</li>
+      <li>Orders and invoices exchanged via EDI</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>Dropshipment</summary>
+    <p>
+      Dropshipment allows you to sell products without holding stock by shipping
+      directly to your customer.
+    </p>
+    <ul>
+      <li>Delivery directly to end customer</li>
+      <li>No inventory held by retailer</li>
+      <li>Order, delivery status, and invoicing via EDI</li>
+    </ul>
+  </details>
+
+  <details>
+    <summary>B2B Shop vs Dropshipment – Comparison</summary>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Area</th>
+          <th>B2B Shop</th>
+          <th>Dropshipment</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td>Delivery destination</td>
+          <td>Retailer warehouse</td>
+          <td>End customer</td>
+        </tr>
+        <tr>
+          <td>Inventory</td>
+          <td>Held by retailer</td>
+          <td>Held by Mascot</td>
+        </tr>
+        <tr>
+          <td>Order source</td>
+          <td>ERP or B2B webshop</td>
+          <td>E-commerce platform or ERP</td>
+        </tr>
+        <tr>
+          <td>Fulfilment</td>
+          <td>Mascot → Retailer</td>
+          <td>Mascot → End customer</td>
+        </tr>
+        <tr>
+          <td>EDI scope</td>
+          <td>Orders, delivery info, invoices</td>
+          <td>Orders, delivery info, invoices</td>
+        </tr>
+        <tr>
+          <td>Typical use case</td>
+          <td>Stock-based wholesale</td>
+          <td>Extended assortment, no stock risk</td>
+        </tr>
+      </tbody>
+    </table>
+
+  </details>
+
+</div>
+
+<div class="box cta">
+  <h2>Continue to technical documentation</h2>
+  <p>
+    Once you have decided which setup applies to your business,
+    continue to the integration catalogue.
+  </p>
+  <a href="index.html">Go to the Integration Catalog</a>
+  <p class="note">
+    Detailed message formats and technical requirements are available in the catalogue.
+  </p>
+</div>
+
+</body>
+</html>
