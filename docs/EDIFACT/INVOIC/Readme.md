@@ -23,7 +23,7 @@ You do **not** need deep EDIFACT knowledge to get started.
 8. [Line Items](#line-items)
 9. [Monetary Amounts (MOA)](#monetary-amounts-moa)
 10. [Tax](#tax)
-11. [Charges & Allowances](#charges-&-allowances)
+11. [Charges & Allowances](#charges--allowances)
 12. [What Can Be Customised](#what-can-be-customised)
 13. [Example INVOIC Message (Simplified)](#example-invoic-message-simplified)
 
