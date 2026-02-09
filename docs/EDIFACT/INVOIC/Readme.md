@@ -13,19 +13,19 @@ You do **not** need deep EDIFACT knowledge to get started.
 ---
 
 ## Table of Contents
-1. Supported EDIFACT Versions
-2. Message Header
-3. Dates (DTM)
-4. Parties (NAD)
-5. References (RFF)
-6. Currency (CUX)
-7. Payment Terms
-8. Line Items
-9. Monetary Amounts (MOA)
-10. Tax
-11. Charges & Allowances
-12. What Can Be Customised
-13. Example INVOIC Message (Simplified)
+1. [Supported EDIFACT Versions](#supported-edifact-versions)
+2. [Message Header](#message-header)
+3. [Dates (DTM)](#dates-dtm)
+4. [Parties (NAD)](#parties-nad)
+5. [References (RFF)](#references-rff)
+6. [Currency (CUX)](#currency-cux)
+7. [Payment Terms](#payment-terms)
+8. [Line Items](#line-items)
+9. [Monetary Amounts (MOA)](#monetary-amounts-moa)
+10. [Tax](#tax)
+11. [Charges & Allowances](#charges-&-allowances)
+12. [What Can Be Customised](#what-can-be-customised)
+13. [Example INVOIC Message (Simplified)](#example-invoic-message-simplified)
 
 ---
 
