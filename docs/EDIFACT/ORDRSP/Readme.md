@@ -13,20 +13,20 @@ You do **not** need deep EDIFACT knowledge to get started.
 ---
 
 ## Table of Contents
-1. Supported EDIFACT Versions  
-2. Message Header  
-3. Dates (DTM)  
-4. Parties & Contacts (NAD / CTA / COM)  
-5. References (RFF)  
-6. Currency (CUX)  
-7. Delivery Terms (TOD)  
-8. Line Items (LIN / PIA)  
-9. Quantities (QTY)  
-10. Prices & Amounts (PRI / MOA)  
-11. Tax  
-12. Charges & Allowances  
-13. What Can Be Customised  
-14. Example ORDRSP Message (Simplified)  
+1. [Supported EDIFACT Versions](#supported-edifact-versions)
+2. [Message Header](#message-header)
+3. [Dates (DTM)](#dates-dtm)
+4. [Parties & Contacts (NAD / CTA / COM)](#parties--contacts-nad-cta-com)
+5. [References (RFF)](#references-rff)  
+6. [Currency (CUX)](#currency-cux) 
+7. [Delivery Terms (TOD)](#delivery-terms-tod)
+8. [Line Items (LIN / PIA)](#line-items-lin-pia)
+9. [Quantities (QTY)](#quantities-qty)
+10. [Prices & Amounts (PRI / MOA)](#prices--amounts-pri-moa)
+11. [Tax](#tax)  
+12. [Charges & Allowances](#charges--allowances)
+13. [What Can Be Customised](#what-can-be-customised)
+14. [Example ORDRSP Message (Simplified)](#example-ordrsp-message-simplified)
 
 ---
 
