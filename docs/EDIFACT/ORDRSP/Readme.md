@@ -16,7 +16,7 @@ You do **not** need deep EDIFACT knowledge to get started.
 1. [Supported EDIFACT Versions](#supported-edifact-versions)
 2. [Message Header](#message-header)
 3. [Dates (DTM)](#dates-dtm)
-4. [Parties & Contacts (NAD / CTA / COM)](#parties--contacts-nad-cta-com)
+4. [Parties & Contacts (NAD / CTA / COM)](#parties--contacts-nad--cta--com)
 5. [References (RFF)](#references-rff)  
 6. [Currency (CUX)](#currency-cux) 
 7. [Delivery Terms (TOD)](#delivery-terms-tod)
