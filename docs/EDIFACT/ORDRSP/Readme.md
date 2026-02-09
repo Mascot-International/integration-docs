@@ -20,7 +20,7 @@ You do **not** need deep EDIFACT knowledge to get started.
 5. [References (RFF)](#references-rff)  
 6. [Currency (CUX)](#currency-cux) 
 7. [Delivery Terms (TOD)](#delivery-terms-tod)
-8. [Line Items (LIN / PIA)](#line-items-lin-pia)
+8. [Line Items (LIN / PIA)](##line-items-lin--pia)
 9. [Quantities (QTY)](#quantities-qty)
 10. [Prices & Amounts (PRI / MOA)](#prices--amounts-pri-moa)
 11. [Tax](#tax)  
