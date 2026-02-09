@@ -13,18 +13,18 @@ You do **not** need deep EDIFACT knowledge to get started.
 ---
 
 ## Table of Contents
-1. Supported EDIFACT Versions  
-2. Message Header  
-3. Dates (DTM)  
-4. References (RFF)  
-5. Parties (NAD)  
-6. Delivery Terms (TOD)  
-7. Packaging & Logistics  
-8. Line Items  
-9. Quantities  
-10. Control Segments  
-11. What Can Be Customised  
-12. Example DESADV Message  
+1. [Supported EDIFACT Versions](#supported-edifact-versions)
+2. [Message Header](#message-header)
+3. [Dates (DTM)](#dates-dtm)
+4. [References (RFF)](#references-rff)
+5. [Parties (NAD)](#parties-nad)
+6. [Delivery Terms (TOD)](#delivery-terms-tod)
+8. [Packaging & Logistics](#packaging--logistics)
+9. [Line Items](#line-items)
+10. [Quantities](#quantities)
+11. [Control Segments](#control-segments)
+12. [What Can Be Customised](#what-can-be-customised)
+13. [Example DESADV Message](#example-desadv-message)
 
 ---
 
