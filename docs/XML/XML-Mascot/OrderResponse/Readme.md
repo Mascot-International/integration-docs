@@ -1,4 +1,4 @@
-# Mascot XML Order Response Structure – Documentation
+# Mascot XML Order Response – Documentation
 
 This document explains the structure, rules, and configuration for **XML Order Responses** from Mascot.  
 It includes **header**, **order line**, and **totals** fields, as well as details for **parties** and **delivery handling**.
