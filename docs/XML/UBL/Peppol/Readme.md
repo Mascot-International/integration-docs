@@ -5,7 +5,7 @@ This document explains the structure, rules, and calculation principles for a **
 ---
 
 ## Table of Contents
-1. [Rules](#rules))
+1. [Rules](#rules)
 2. [Data Types](#data-types)
 3. [Invoice Header Structure](#invoice-header-structure)
 4. [Party Information](#party-information)
