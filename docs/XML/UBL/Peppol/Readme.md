@@ -5,13 +5,13 @@ This document explains the structure, rules, and calculation principles for a **
 ---
 
 ## Table of Contents
-1. Rules
-2. Data Types
-3. Invoice Header Structure
-4. Party Information
-5. Tax and Monetary Totals
-6. Invoice Line Structure
-7. Discount Handling Rules
+1. [Rules](#rules))
+2. [Data Types](#data-types)
+3. [Invoice Header Structure](#invoice-header-structure)
+4. [Party Information](#party-information)
+5. [Tax and Monetary Totals](#tax-and-monetary-totals)
+6. [Invoice Line Structure](#invoice-line-structure)
+7. [Discount Handling Rules](#discount-handling-rules)
 
 ---
 
