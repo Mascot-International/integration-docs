@@ -48,7 +48,7 @@ The Despatch Advice is used to notify the buyer about goods that have been shipp
 |-------|------|------------|---------|
 | `Schema/Version` | **M** | Despatch Advice schema version | `1` |
 | `DeliveryNoteNumber` | **M** | Supplier delivery note number | `DN-10001` |
-| `BuyerOrderReference` | **R** | Buyer order reference | `ORDER-REF-01` |
+| `BuyerOrderReference` | **R** | Buyer order reference(s) if multiple, seperated with "," | `ORDER-REF-01` |
 | `DespatchAdviceDate` | **M** | Document creation date | `2025-01-20` |
 | `DespatchDate` | **M** | Goods despatch date | `2025-01-21` |
 | `ExpectedDeliveryDate` | **R** | Expected delivery date | `2025-01-23` |
