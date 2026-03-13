@@ -117,6 +117,7 @@ Each `DespatchLines` element represents one despatched item.
 |-------|------|------------|
 | `Line` | **M** | Despatch line number |
 | `OriginalLine` | **R** | Original order line number |
+| `OriginalBuyerReference` | **R** | Original Buyer Reference number |
 | `BuyerLineReference` | **O** | Buyer line reference |
 | `SupplierMaterialNumber` | **R** | Supplier material number |
 | `EAN` | **R** | Product EAN |
