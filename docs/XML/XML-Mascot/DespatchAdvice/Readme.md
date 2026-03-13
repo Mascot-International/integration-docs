@@ -104,6 +104,8 @@ Same structure and rules as `SupplierParty`, representing the buyer.
 | `PackageID` | **M** | Unique package identifier |
 | `GrossWeight` | **M** | Gross package weight |
 | `NetWeight` | **M** | Net package weight |
+| `Volume` | **M** | Package volume |
+| `PackageQuantity` | **M** | Total quantity in the package |
 
 Multiple `Packages` elements may be provided if several packages are shipped.
 
@@ -135,7 +137,7 @@ Each `DespatchLines` element represents one despatched item.
 |-------|------|------------|
 | `PackageID` | **M** | Package reference |
 | `PackageType` | **O** | Package type |
-| `PackageQuantity` | **M** | Quantity in package |
+| `PackageQuantity` | **M** | Total quantity in the package |
 
 ---
 
