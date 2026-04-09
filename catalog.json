@@ -53,6 +53,12 @@
         { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/UBL/OIOUBL", "connections": ["SFTP","EMAIL","Nemhandel"] }
       ]
     },
+                {
+      "name": "ZUGFeRD",
+      "formats": [
+        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/CII/ZUGFeRD", "connections": ["SFTP","EMAIL"] }
+      ]
+    },
         {
       "name": "API",
       "formats": [
