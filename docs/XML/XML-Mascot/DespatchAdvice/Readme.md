@@ -7,15 +7,15 @@ The Despatch Advice is used to notify the buyer about goods that have been shipp
 ---
 
 ## Table of Contents
-1. Rules
-2. Data Types
-3. Despatch Advice Header Structure
-4. Party Information
-5. Transport and Delivery Information
-6. Package Information
-7. Despatch Line Structure
-8. Despatch Totals
-9. Example XML Structure
+1. [Rules](#rules)
+2. [Data Types](#data-types)
+3. [Despatch Advice Header Structure](#despatch-advice-header-structure)
+4. [Party Information](#party-information)
+5. [Transport and Delivery Information](#transport-and-delivery-information)
+6. [Package Information](#package-information)
+7. [Despatch Line Structure](#despatch-line-structure)
+8. [Despatch Totals](#despatch-totals)
+9. [Example XML Structure](#example-xml-mascot-structure)
 
 ---
 
