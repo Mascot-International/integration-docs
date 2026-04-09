@@ -14,7 +14,6 @@
       "formats": [
         { "name": "Orders", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/Orders", "connections": ["SFTP"] },
         { "name": "Order Response", "docUrl": "https://github.com/Mascot-International/integration-docs/blob/main/docs/XML/XML-Mascot/OrderResponse/Readme.md", "connections": ["SFTP","EMAIL"] },
-        { "name": "Invoice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML-Mascot/Invoice", "connections": ["SFTP","EMAIL"] },
         { "name": "Despatch Advice", "docUrl": "https://github.com/Mascot-International/integration-docs/tree/main/docs/XML/XML-Mascot/DespatchAdvice", "connections": ["SFTP","EMAIL"] }
       ]
     },
