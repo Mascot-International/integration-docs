@@ -5,15 +5,15 @@ This document explains the structure, rules, and calculation principles for a **
 ---
 
 ## Table of Contents
-1. Rules
-2. Data Types
-3. Invoice Header Structure
-4. Party Information
-5. Delivery Information
-6. Allowances and Charges
-7. Tax and Monetary Totals
-8. Invoice Line Structure
-9. Discount Handling Rules (10%)
+1. [Rules](#rules)
+2. [Data Types](#data-types)
+3. [Invoice Header Structure](#invoice-header-structure)
+4. [Party Information](#party-information)
+5. [Delivery Information](#delivery-information)
+6. [Allowances and Charges](#allowances-and-charges)
+7. [Tax and Monetary Totals](#tax-and-monetary-totals)
+8. [Invoice Line Structure](#invoice-line-structure)
+9. [Discount Handling Rules (10%)](#discount-handling-rules-10)
 
 ---
 
