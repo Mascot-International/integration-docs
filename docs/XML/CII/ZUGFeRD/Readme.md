@@ -5,15 +5,15 @@ This document explains the structure, rules, and calculation principles for an *
 ---
 
 ## Table of Contents
-1. Rules
-2. Data Types
-3. Document Context
-4. Document Header
-5. Trade Parties
-6. Delivery Information
-7. Allowances and Charges
-8. Tax and Monetary Totals
-9. Invoice Line Structure
+1. [Rules](#rules)
+2. [Data Types](#data-types)
+3. [Document Context](#document-context)
+4. [Document Header](#document-header)
+5. [Trade Parties](#trade-parties)
+6. [Delivery Information](#delivery-information)
+7. [Allowances and Charges](#allowances-and-charges)
+8. [Tax and Monetary Totals](#tax-and-monetary-totals)
+9. [Invoice Line Structure](#invoice-line-structure)
 
 ---
 
