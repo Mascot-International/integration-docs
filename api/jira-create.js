@@ -6,7 +6,7 @@ let rateLimitStore = {}; // Simple in-memory store (resets on cold start)
 
 export default async function handler(req, res) {
   // --- CORS headers ---
-  res.setHeader('Access-Control-Allow-Origin', '*'); // Or restrict to GitHub Pages URL
+  res.setHeader('Access-Control-Allow-Origin', 'https://mascot-international.github.io'); // Or restrict to GitHub Pages URL
   res.setHeader('Access-Control-Allow-Methods', 'POST, OPTIONS');
   res.setHeader('Access-Control-Allow-Headers', 'Content-Type, Authorization');
 
@@ -146,7 +146,7 @@ export default async function handler(req, res) {
       issueKey: createdIssue.key
     });
     }
-  } catch (error) {
+    catch (error) {
     console.error('Error creating Jira ticket:', error);
     return res.status(500).json({ success: false, error: 'Internal server error.' });
   }
