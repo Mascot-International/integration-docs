@@ -92,30 +92,60 @@ export default async function handler(req, res) {
     }
     
     // --- Send to Jira API with Basic Auth ---
-    const authHeader = 'Basic ' + Buffer.from(`${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`).toString('base64');
-
-    const jiraResponse = await fetch(`${process.env.JIRA_BASE_URL}/rest/api/3/issue`, {
+    const authHeader =
+      'Basic ' +
+      Buffer.from(
+        `${process.env.JIRA_EMAIL}:${process.env.JIRA_API_TOKEN}`
+      ).toString('base64');
+    
+    const jiraUrl =
+      `https://api.atlassian.com/ex/jira/` +
+      `${process.env.JIRA_CLOUD_ID}/rest/api/3/issue`;
+    
+    console.log('Creating Jira issue in project:', process.env.JIRA_PROJECT_KEY);
+    console.log('Jira API URL:', jiraUrl);
+    
+    const jiraResponse = await fetch(jiraUrl, {
       method: 'POST',
       headers: {
-        'Authorization': authHeader,
-        'Accept': 'application/json',
+        Authorization: authHeader,
+        Accept: 'application/json',
         'Content-Type': 'application/json'
       },
       body: JSON.stringify(jiraPayload)
     });
-
+    
     if (!jiraResponse.ok) {
       const errorText = await jiraResponse.text();
-      console.error('Jira API error:', errorText);
-      return res.status(500).json({ success: false, error: 'Failed to create Jira ticket.' });
+    
+      console.error(
+        'Jira API error:',
+        jiraResponse.status,
+        jiraResponse.statusText,
+        errorText
+      );
+    
+      return res.status(jiraResponse.status).json({
+        success: false,
+        error: 'Failed to create Jira ticket.',
+        jiraStatus: jiraResponse.status,
+        jiraResponse: errorText
+      });
     }
-    await jiraResponse.json();
+    
+    const createdIssue = await jiraResponse.json();
+    
+    console.log('Jira issue created:', createdIssue.key);
 
-    // --- Update rate limit ---
+    // --- Update rate limit only after successful Jira creation ---
     rateLimitStore[ip] = now;
-
-    return res.status(200).json({ success: true, message: 'Jira ticket created successfully.' });
-
+    
+    return res.status(200).json({
+      success: true,
+      message: 'Jira ticket created successfully.',
+      issueKey: createdIssue.key
+    });
+    }
   } catch (error) {
     console.error('Error creating Jira ticket:', error);
     return res.status(500).json({ success: false, error: 'Internal server error.' });
