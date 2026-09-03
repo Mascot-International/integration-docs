@@ -84,7 +84,7 @@ For **B2C orders (Ordertype = ZE)**, additional fields are required:
 | `<DeliveryType>` | Max Length 3 (alphanumeric) | **M** | `Z00` = Company address, `Z01` = Private address. | `Z01` |
 | `<DepositLocation>` | Max Length 30 | **O** | Deposit location description. | `Carport` |
 | `<Name>` | Max Length 60 | **M** | Name of recipient. | `John Doe` |
-| `<Street>` | Max Length 30 (alphanumeric) | **M** | Delivery street. | `Silkeborgvej 12` |
+| `<Street>` | Max Length 30 (alphanumeric) | **M** | Delivery street + number | `Silkeborgvej 12` |
 | `<PostCode>` | Max Length 10 (numeric) | **M** | Postal code. | `7000` |
 | `<City>` | Max Length 30 (alphanumeric) | **M** | City. | `Silkeborg` |
 | `<CountryCode>` | Max Length 2 | **M** | ISO 3166 country code. | `DK` |
