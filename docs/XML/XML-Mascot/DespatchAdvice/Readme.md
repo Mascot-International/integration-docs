@@ -105,9 +105,12 @@ Same structure and rules as `SupplierParty`, representing the buyer.
 | `GrossWeight` | **M** | Gross package weight |
 | `NetWeight` | **M** | Net package weight |
 | `Volume` | **M** | Package volume |
-| `PackageQuantity` | **M** | Total quantity in the package |
+| `TrackAndTrace` | **M** | Track and trace information for the specific package |
+| `Carrier` | **M** | Carrier information for the specific package |
+| `TrackingNumber` | **M** | The tracking number for the specific package |
 
 Multiple `Packages` elements may be provided if several packages are shipped.
+Single `TrackAndTrace` element for each shipped package.
 
 ---
 
@@ -209,9 +212,16 @@ Each `DespatchLines` element represents one despatched item.
   </DeliveryToParty>
 
   <Packages>
-    <PackageID>PKG-001</PackageID>
-    <GrossWeight>0.28</GrossWeight>
-    <NetWeight>0.28</NetWeight>
+    <PackageNumber>1</PackageNumber>
+    <PackageID>8994443</PackageID>
+    <GrossWeight>2.71</GrossWeight>
+    <NetWeight>1.67</NetWeight>
+    <Volume>77.80</Volume>
+    <PackageQuantity>2</PackageQuantity>
+    <TrackAndTrace>
+      <Carrier>GLS</Carrier>
+      <TrackingNumber>123456789</TrackingNumber>
+    </TrackAndTrace>
   </Packages>
 
   <DespatchLines>
